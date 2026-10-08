@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "error-container": "#ffdad6", "on-primary-fixed": "#410003", "surface": "#fff8f6", "on-error-container": "#93000a", "error": "#ba1a1a", "surface-tint": "#b91d20", "surface-variant": "#f5ddd7", "primary-container": "#c62828", "on-primary-fixed-variant": "#93000e", "outline": "#8f706c", "on-secondary-container": "#6b4500", "on-secondary": "#ffffff", "on-tertiary-container": "#eae6e2", "on-tertiary": "#ffffff", "on-secondary-fixed": "#291800", "surface-container": "#ffe9e3", "inverse-primary": "#ffb4ac", "surface-container-low": "#fff1ed", "surface-container-high": "#fbe3dc", "tertiary": "#504f4c", "surface-container-lowest": "#ffffff", "on-background": "#251915", "on-primary": "#ffffff", "on-primary-container": "#ffe0dd", "on-surface-variant": "#5b403d", "secondary-container": "#feae2c", "on-tertiary-fixed": "#1c1c19", "secondary": "#835500", "secondary-fixed-dim": "#ffb955", "inverse-surface": "#3b2d29", "surface-dim": "#edd5ce", "outline-variant": "#e4beba", "tertiary-container": "#696764", "on-secondary-fixed-variant": "#633f00", "surface-bright": "#fff8f6", "primary-fixed-dim": "#ffb4ac", "on-surface": "#251915", "on-error": "#ffffff", "secondary-fixed": "#ffddb4", "primary-fixed": "#ffdad6", "background": "#fff8f6", "primary": "#a20513", "tertiary-fixed-dim": "#c9c6c2", "inverse-on-surface": "#ffede8", "tertiary-fixed": "#e5e2de", "on-tertiary-fixed-variant": "#484744", "surface-container-highest": "#f5ddd7" }, "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, "spacing": { "space-xs": "0.25rem", "space-lg": "1.5rem", "space-xl": "2rem", "space-sm": "0.5rem", "margin": "1.25rem", "gutter": "1rem", "space-md": "1rem" }, "fontFamily": { "body-lg": ["Plus Jakarta Sans"], "headline-hero-mobile": ["Bebas Neue"], "headline-md": ["Bebas Neue"], "title-md": ["Plus Jakarta Sans"], "headline-lg": ["Bebas Neue"], "headline-hero": ["Bebas Neue"], "title-sm": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "label-lg": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "headline-sm": ["Bebas Neue"], "label-price": ["Plus Jakarta Sans"], "body-md": ["Plus Jakarta Sans"] }, "fontSize": { "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}], "headline-hero-mobile": ["36px", {"lineHeight": "38px", "letterSpacing": "0.04em", "fontWeight": "400"}], "headline-md": ["24px", {"lineHeight": "26px", "letterSpacing": "0.02em", "fontWeight": "400"}], "title-md": ["18px", {"lineHeight": "24px", "fontWeight": "700"}], "headline-lg": ["32px", {"lineHeight": "34px", "letterSpacing": "0.03em", "fontWeight": "400"}], "headline-hero": ["48px", {"lineHeight": "48px", "letterSpacing": "0.04em", "fontWeight": "400"}], "title-sm": ["16px", {"lineHeight": "22px", "fontWeight": "600"}], "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "600"}], "label-lg": ["14px", {"lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "700"}], "body-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}], "headline-sm": ["20px", {"lineHeight": "22px", "letterSpacing": "0.02em", "fontWeight": "400"}], "label-price": ["16px", {"lineHeight": "20px", "fontWeight": "800"}], "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}] } } } }</script></head><body class="bg-background font-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest shadow-[0_4px_20px_rgba(138,98,77,0.08)] z-50 flex flex-col justify-between"><div class="flex flex-col flex-1 overflow-y-auto"><div class="p-space-lg flex items-center gap-space-sm bg-surface-container-low"><img alt="csjmulogo.png" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Ue2iK4qEgYI5XQE6GNTZ4-tX9MvmKGqzC5uiR1PD-xWmeWWlnhqL1QL1BOFpe9wgiaXefHWMDb4V30p7m84TlaRr5gZGJ2XMPsgW5CmjD7e8dBIds4X8Yw8IvSwAPr-7AjinK9lguPJ2qc_8z6Bey6rTIDQZVfSiWNzr8l3mSLRBHK2NosHX1jFFkf6YYA6UlpSqtE8RuolF-A_pucXzRNnQKfocmJWFAp7411oYcJnoR7aqGPHCs8"/><div class="flex flex-col"><span class="font-headline-md text-headline-md text-primary tracking-wide leading-none">CSJMU CAFE</span><span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Kitchen Operations</span></div></div><div class="mx-space-md my-space-md p-space-md bg-surface-container-low rounded-DEFAULT flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-label-md text-label-md text-on-surface-variant font-bold uppercase">Station Feed</span><span class="inline-flex items-center gap-1 font-label-md text-label-md text-on-surface bg-surface-container px-space-sm py-0.5 rounded-full"><span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>Online</span></div><span class="font-title-sm text-title-sm text-on-surface truncate">Counter #2 Main Canteen</span><div class="flex items-center gap-2 mt-1"><span class="material-symbols-outlined text-primary text-[18px]">chef_hat</span><span class="font-body-sm text-body-sm text-on-surface-variant font-medium">Chef Ramesh K.</span></div></div><nav class="px-space-md flex flex-col gap-1" data-active-classes="bg-primary-container text-on-primary font-bold shadow-[0_4px_12px_rgba(198,40,40,0.25)]"><a aria-current="page" class="flex items-center justify-between px-space-md py-3 rounded-DEFAULT transition-all bg-primary-container text-on-primary font-bold shadow-[0_4px_12px_rgba(198,40,40,0.25)]" data-path="live-orders" href="#"><span class="flex items-center gap-3"><span class="material-symbols-outlined text-[20px]">skillet</span><span class="font-label-lg text-label-lg">Live Orders</span></span><span class="bg-secondary-container text-on-secondary-container font-label-md text-label-md px-2 py-0.5 rounded-full font-bold">18 Active</span></a><a class="flex items-center gap-3 px-space-md py-3 rounded-DEFAULT text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="kitchen-kanban" href="#"><span class="material-symbols-outlined text-[20px]">view_kanban</span><span class="font-label-lg text-label-lg">Kitchen Kanban</span></a><a class="flex items-center gap-3 px-space-md py-3 rounded-DEFAULT text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="order-history" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span class="font-label-lg text-label-lg">Order History &amp; Search</span></a><a class="flex items-center gap-3 px-space-md py-3 rounded-DEFAULT text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="menu-stock-availability" href="#"><span class="material-symbols-outlined text-[20px]">inventory_2</span><span class="font-label-lg text-label-lg">Menu Stock &amp; Availability</span></a><a class="flex items-center gap-3 px-space-md py-3 rounded-DEFAULT text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="counter-token-display" href="#"><span class="material-symbols-outlined text-[20px]">campaign</span><span class="font-label-lg text-label-lg">Counter Call &amp; Tokens</span></a><a class="flex items-center gap-3 px-space-md py-3 rounded-DEFAULT text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="daily-kot-reports" href="#"><span class="material-symbols-outlined text-[20px]">assessment</span><span class="font-label-lg text-label-lg">Daily KOT &amp; Reports</span></a><a class="flex items-center gap-3 px-space-md py-3 rounded-DEFAULT text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-all" data-path="kitchen-settings" href="#"><span class="material-symbols-outlined text-[20px]">tune</span><span class="font-label-lg text-label-lg">Kitchen Settings</span></a></nav></div><div class="p-space-md bg-surface-container-low"><div class="p-space-md bg-surface-container-lowest rounded-DEFAULT shadow-[0_2px_8px_rgba(138,98,77,0.06)] flex items-center justify-between"><div><div class="font-label-md text-label-md text-on-surface font-bold">Rush Hour Auto-Accept</div><div class="font-body-sm text-body-sm text-on-surface-variant">Active for express lunch</div></div><span class="material-symbols-outlined text-secondary-container">toggle_on</span></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-md shadow-[0_1px_8px_rgba(138,98,77,0.06)] z-40 flex items-center justify-between px-space-lg gap-space-md"><div class="flex items-center gap-space-md flex-1 max-w-2xl"><img alt="csjmulogo.png" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Ue2iK4qEgYI5XQE6GNTZ4-tX9MvmKGqzC5uiR1PD-xWmeWWlnhqL1QL1BOFpe9wgiaXefHWMDb4V30p7m84TlaRr5gZGJ2XMPsgW5CmjD7e8dBIds4X8Yw8IvSwAPr-7AjinK9lguPJ2qc_8z6Bey6rTIDQZVfSiWNzr8l3mSLRBHK2NosHX1jFFkf6YYA6UlpSqtE8RuolF-A_pucXzRNnQKfocmJWFAp7411oYcJnoR7aqGPHCs8"/><div class="flex items-center gap-2 px-space-md py-1.5 bg-surface-container-low rounded-full"><span class="material-symbols-outlined text-primary text-[18px]">storefront</span><span class="font-label-md text-label-md text-on-surface font-bold truncate">Ground Floor Express Window</span></div><div class="flex-1 relative"><span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-[18px]">search</span><input class="w-full pl-9 pr-4 py-1.5 bg-surface-container-low text-on-surface rounded-full font-body-sm text-body-sm outline-none placeholder:text-on-surface-variant" placeholder="Search token #, roll no, student..." type="text"/></div></div><div class="flex items-center gap-space-sm"><div class="flex items-center gap-1.5 px-space-sm py-1 bg-surface-container rounded-full"><span class="w-2 h-2 rounded-full bg-secondary-container animate-ping"></span><span class="font-label-md text-label-md text-on-surface">3s Sync</span></div><button class="flex items-center gap-1 px-3 py-1.5 bg-surface-container hover:bg-surface-container-high rounded-full text-on-surface transition-colors font-label-md text-label-md"><span class="material-symbols-outlined text-[18px] text-primary">notifications_active</span><span>Chime On</span></button><button class="flex items-center gap-1 px-3 py-1.5 bg-surface-container hover:bg-surface-container-high rounded-full text-on-surface transition-colors font-label-md text-label-md"><span class="material-symbols-outlined text-[18px]">print</span><span>Reprint KOT</span></button><button class="flex items-center gap-1.5 px-3 py-1.5 bg-primary-container text-on-primary rounded-full hover:bg-primary transition-all font-label-md text-label-md shadow-[0_4px_12px_rgba(198,40,40,0.2)]"><span class="material-symbols-outlined text-[16px]">pause_circle</span><span>Pause Orders</span></button><div class="flex items-center gap-2 pl-space-xs"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="relative pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Interactive Toast Notification Component -->
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 bg-inverse-surface text-inverse-on-surface px-5 py-3 rounded-DEFAULT shadow-xl" id="kitchen-toast">
+<span class="material-symbols-outlined text-secondary-container" id="toast-icon">notifications_active</span>
+<span class="font-title-sm text-title-sm" id="toast-msg">Order status updated successfully</span>
+</div>
+<div class="p-space-lg flex flex-col gap-space-lg max-w-[1720px] mx-auto w-full">
+<!-- TOP SECTION: HEADER CONTEXT & FAST STATS -->
+<section class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-space-md">
+<div>
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-0.5 rounded-full bg-primary/10 text-primary font-label-md text-label-md uppercase tracking-wider font-bold">Kitchen Production Hub</span>
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">Kalyanpur Campus • Central Kitchen #2</span>
+</div>
+<div class="flex items-baseline gap-3 mt-1">
+<h1 class="font-headline-hero text-headline-hero text-on-surface tracking-wide uppercase">Live Order Terminal</h1>
+<span class="font-title-sm text-title-sm text-primary font-bold">Lunch Rush Feed (12:30 - 02:30 PM)</span>
+</div>
+</div>
+<!-- Rush Buffer Control & Shift Action -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<div class="flex items-center gap-3 bg-surface-container-lowest px-4 py-2 rounded-DEFAULT shadow-sm">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-bold flex items-center gap-1">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary-container animate-ping"></span>
+              Kitchen Load: Moderate
+            </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Est. wait: 12-14 mins per ticket</span>
+</div>
+<button class="px-3 py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1.5 transition-all" id="rush-toggle-btn" onclick="toggleRushMode()">
+<span class="material-symbols-outlined text-[16px] text-secondary">bolt</span>
+<span id="rush-text">Rush Buffer (+5m)</span>
+</button>
+</div>
+<button class="flex items-center gap-2 px-4 py-2.5 bg-surface-container-lowest hover:bg-surface-container rounded-DEFAULT shadow-sm text-on-surface font-label-lg text-label-lg transition-all" onclick="triggerSoundNotification('KOT reprinted for all active tickets')">
+<span class="material-symbols-outlined text-[18px] text-primary">receipt_long</span>
+<span>Batch Print KOTs</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2.5 bg-primary-container text-on-primary rounded-DEFAULT hover:bg-primary shadow-[0_4px_16px_rgba(198,40,40,0.28)] font-label-lg text-label-lg transition-all" onclick="announceAllReady()">
+<span class="material-symbols-outlined text-[18px]">volume_up</span>
+<span>Broadcast Ready Tokens</span>
+</button>
+</div>
+</section>
+<!-- SECTION 1: TOP KPI METRICS BAR -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-space-md">
+<!-- Metric 1: Total Today Orders -->
+<div class="bg-surface-container-lowest p-space-md rounded-DEFAULT shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-on-surface-variant uppercase tracking-wide">Today Orders</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">restaurant</span>
+</div>
+</div>
+<div class="mt-2 flex items-baseline justify-between">
+<div>
+<span class="font-headline-lg text-headline-lg text-on-surface">164</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant ml-1">tickets</span>
+</div>
+<span class="font-label-md text-label-md text-secondary-container bg-secondary-container/10 px-2 py-0.5 rounded-full font-bold">+14% vs y'day</span>
+</div>
+<div class="mt-2 pt-2 bg-surface-container-low/50 -mx-space-md -mb-space-md px-space-md py-1.5 flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Gross Value:</span>
+<span class="font-title-sm text-title-sm text-primary font-bold">₹18,450</span>
+</div>
+</div>
+<!-- Metric 2: Pending (Needs Immediate Attention) -->
+<div class="bg-surface-container-lowest p-space-md rounded-DEFAULT shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="absolute -right-6 -bottom-6 w-20 h-20 bg-error-container/30 rounded-full blur-xl pointer-events-none"></div>
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-error uppercase tracking-wide font-bold flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-error animate-pulse"></span>
+            Pending Orders
+          </span>
+<span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-md text-label-md font-bold">ACTION REQ.</span>
+</div>
+<div class="mt-2 flex items-baseline justify-between">
+<div>
+<span class="font-headline-lg text-headline-lg text-error" id="metric-pending-count">5</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant ml-1">unaccepted</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Oldest: 3m 12s</span>
+</div>
+<div class="mt-2 pt-2 bg-error-container/20 -mx-space-md -mb-space-md px-space-md py-1.5 flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-error-container">Auto-accept countdown:</span>
+<span class="font-title-sm text-title-sm text-error font-bold" id="auto-timer">00:48</span>
+</div>
+</div>
+<!-- Metric 3: Cooking / In Prep -->
+<div class="bg-surface-container-lowest p-space-md rounded-DEFAULT shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-secondary uppercase tracking-wide font-bold">In Cooking</span>
+<div class="w-8 h-8 rounded-full bg-secondary-fixed/50 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[18px]">skillet</span>
+</div>
+</div>
+<div class="mt-2 flex items-baseline justify-between">
+<div>
+<span class="font-headline-lg text-headline-lg text-secondary" id="metric-cooking-count">8</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant ml-1">in pans</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface bg-surface-container px-2 py-0.5 rounded-full">Avg: 6.4m</span>
+</div>
+<div class="mt-2 pt-2 bg-surface-container-low/50 -mx-space-md -mb-space-md px-space-md py-1.5 flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Active Stations:</span>
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Tawa (4) • Fryer (4)</span>
+</div>
+</div>
+<!-- Metric 4: Ready for Pickup -->
+<div class="bg-surface-container-lowest p-space-md rounded-DEFAULT shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-on-surface uppercase tracking-wide font-bold">Counter Shelf</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[18px]">room_service</span>
+</div>
+</div>
+<div class="mt-2 flex items-baseline justify-between">
+<div>
+<span class="font-headline-lg text-headline-lg text-on-surface" id="metric-ready-count">4</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant ml-1">at Window #2</span>
+</div>
+<span class="font-label-md text-label-md text-primary bg-primary/10 px-2 py-0.5 rounded-full font-bold">PA Active</span>
+</div>
+<div class="mt-2 pt-2 bg-surface-container-low/50 -mx-space-md -mb-space-md px-space-md py-1.5 flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Oldest waiting:</span>
+<span class="font-title-sm text-title-sm text-secondary font-bold">#CSJ-139 (4m)</span>
+</div>
+</div>
+<!-- Metric 5: Completed & Service Rate -->
+<div class="bg-surface-container-lowest p-space-md rounded-DEFAULT shadow-sm flex flex-col justify-between relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-on-surface-variant uppercase tracking-wide">Delivered Today</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+</div>
+</div>
+<div class="mt-2 flex items-baseline justify-between">
+<div>
+<span class="font-headline-lg text-headline-lg text-on-surface" id="metric-completed-count">147</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant ml-1">cleared</span>
+</div>
+<span class="font-label-md text-label-md text-on-secondary-container bg-secondary-container/20 px-2 py-0.5 rounded-full font-bold">98.2% S.L.A</span>
+</div>
+<div class="mt-2 pt-2 bg-surface-container-low/50 -mx-space-md -mb-space-md px-space-md py-1.5 flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Student Ratings:</span>
+<span class="font-title-sm text-title-sm text-on-surface font-semibold flex items-center gap-1">★ 4.8 <span class="text-on-surface-variant font-normal text-xs">(82 reviews)</span></span>
+</div>
+</div>
+</section>
+<!-- MAIN TWO-COLUMN DASHBOARD GRID -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT / CENTER: MAIN OPERATIONAL LIST & TOOLS (8 COLS) -->
+<section class="xl:col-span-8 flex flex-col gap-space-md">
+<!-- SECTION 2: ACTION & FILTER TOOLBAR -->
+<div class="bg-surface-container-lowest p-space-md rounded-DEFAULT shadow-sm flex flex-col gap-space-md">
+<!-- Top Row: Search + Category Filters + View Mode -->
+<div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-space-sm">
+<!-- Search Input -->
+<div class="relative flex-1 max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low text-on-surface placeholder:text-on-surface-variant rounded-full font-body-md text-body-md outline-none focus:bg-surface-container transition-all" id="order-search-input" onkeyup="filterOrdersSearch()" placeholder="Search Token (#CSJ-142), Student Name, Roll No..." type="text"/>
+<button class="hidden absolute right-3 top-2.5 text-on-surface-variant hover:text-on-surface" id="clear-search-btn" onclick="clearSearch()">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- View Switcher & Quick Refresh -->
+<div class="flex items-center gap-space-xs self-end md:self-auto">
+<div class="bg-surface-container-low p-1 rounded-full flex items-center">
+<button class="px-3 py-1 rounded-full bg-surface-container-lowest text-primary font-label-md text-label-md shadow-sm transition-all flex items-center gap-1 font-bold" id="view-table-btn" onclick="setViewMode('table')">
+<span class="material-symbols-outlined text-[16px]">format_list_bulleted</span>
+<span>List View</span>
+</button>
+<button class="px-3 py-1 rounded-full text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-all flex items-center gap-1" id="view-kanban-btn" onclick="setViewMode('kanban')">
+<span class="material-symbols-outlined text-[16px]">view_kanban</span>
+<span>Kanban</span>
+</button>
+</div>
+<div class="h-6 w-px bg-surface-container-high mx-1"></div>
+<button class="p-2 rounded-full bg-surface-container-low hover:bg-surface-container text-on-surface transition-all flex items-center justify-center" onclick="reloadOrdersSim()" title="Refresh Live Orders">
+<span class="material-symbols-outlined text-[18px]">sync</span>
+</button>
+</div>
+</div>
+<!-- Bottom Row: Status Filter Tabs & Kitchen Station Filters -->
+<div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-space-sm pt-2 bg-surface-container-lowest">
+<!-- Status Tabs -->
+<div class="flex items-center gap-2 overflow-x-auto w-full lg:w-auto pb-1 lg:pb-0" id="status-filter-pills">
+<button class="status-tab active-tab px-3 py-1 rounded-full bg-primary text-on-primary font-label-md text-label-md transition-all whitespace-nowrap flex items-center gap-1.5 shadow-sm" data-status="all" onclick="filterByStatus('all')">
+<span>All Orders</span>
+<span class="bg-white/20 px-1.5 py-0.2 rounded-full text-xs">17</span>
+</button>
+<button class="status-tab px-3 py-1 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-all whitespace-nowrap flex items-center gap-1.5" data-status="pending" onclick="filterByStatus('pending')">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span>Pending</span>
+<span class="bg-surface-container text-error px-1.5 py-0.2 rounded-full text-xs font-bold" id="badge-tab-pending">5</span>
+</button>
+<button class="status-tab px-3 py-1 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-all whitespace-nowrap flex items-center gap-1.5" data-status="cooking" onclick="filterByStatus('cooking')">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+<span>Cooking</span>
+<span class="bg-surface-container text-secondary px-1.5 py-0.2 rounded-full text-xs font-bold">8</span>
+</button>
+<button class="status-tab px-3 py-1 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-all whitespace-nowrap flex items-center gap-1.5" data-status="ready" onclick="filterByStatus('ready')">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+<span>Ready for Pickup</span>
+<span class="bg-surface-container text-on-surface px-1.5 py-0.2 rounded-full text-xs font-bold">4</span>
+</button>
+<button class="status-tab px-3 py-1 rounded-full bg-surface-container-low text-on-surface-variant hover:bg-surface-container font-label-md text-label-md transition-all whitespace-nowrap flex items-center gap-1.5" data-status="completed" onclick="filterByStatus('completed')">
+<span>Completed</span>
+<span class="bg-surface-container text-on-surface-variant px-1.5 py-0.2 rounded-full text-xs">147</span>
+</button>
+</div>
+<!-- Station Categorization -->
+<div class="flex items-center gap-1.5 text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px]">filter_alt</span>
+<select class="bg-surface-container-low text-on-surface py-1 px-2.5 rounded-full outline-none font-label-md text-label-md cursor-pointer" id="station-filter" onchange="filterStation(this.value)">
+<option value="all">All Stations (Tawa, Fryer, Bar)</option>
+<option value="thali">Hot Kitchen (Thali, Chole Bhature)</option>
+<option value="fryer">Snack Fryer (Samosa, Pakora)</option>
+<option value="beverage">Beverage Bar (Kulhad Chai, Cold Coffee)</option>
+<option value="rolls">Roll &amp; Kathi Counter</option>
+</select>
+</div>
+</div>
+</div>
+<!-- SECTION 3: ORDERS CONTAINER (TABLE / CARD VIEW) -->
+<div class="flex flex-col gap-space-md" id="orders-list-view">
+<!-- ORDER CARD #1: CSJ-142 (Pending, Veg Thali + Samosa) -->
+<div class="order-ticket-card bg-surface-container-lowest p-space-md rounded-DEFAULT shadow-sm hover:shadow-md transition-all flex flex-col gap-space-sm" data-search="CSJ-142 aryan sharma 210459 b.tech cse deluxe veg thali samosa" data-station="thali fryer" data-status="pending" data-token="CSJ-142">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-3">
+<div class="bg-error-container text-on-error-container px-3 py-1 rounded-DEFAULT font-headline-md text-headline-md tracking-wider flex items-center gap-1">
+<span>#CSJ-142</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-title-sm text-title-sm text-on-surface font-bold">Aryan Sharma</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Roll #210459 • B.Tech CSE (3rd Yr)</span>
+</div>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="font-label-md text-label-md text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 3 mins ago (1:15 PM)
+                    </span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="font-label-md text-label-md text-on-secondary-fixed bg-secondary-fixed px-2 py-0.2 rounded-full font-semibold">UPI Paid (GPay)</span>
+</div>
+</div>
+</div>
+<!-- Status Badge -->
+<div class="flex items-center gap-2">
+<span class="px-3 py-1 rounded-full bg-error-container text-on-error-container font-label-md text-label-md font-bold flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-error animate-ping"></span>
+                  Pending Acceptance
+                </span>
+<span class="font-label-price text-label-price text-primary">₹100</span>
+</div>
+</div>
+<!-- Ordered Food Items Breakdown -->
+<div class="bg-surface-container-low p-space-sm rounded-DEFAULT flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-body-md text-body-md">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded bg-primary-container text-on-primary flex items-center justify-center font-bold text-xs">1</span>
+<span class="font-semibold text-on-surface">Deluxe Veg Thali</span>
+<span class="text-on-surface-variant text-xs">(Dal Makhani, Shahi Paneer, 4 Tawa Rotis, Jeera Rice, Gulab Jamun)</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">₹70</span>
+</div>
+<div class="flex items-center justify-between font-body-md text-body-md">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded bg-primary-container text-on-primary flex items-center justify-center font-bold text-xs">2</span>
+<span class="font-semibold text-on-surface">Hot Punjabi Samosa</span>
+<span class="text-on-surface-variant text-xs">(Crispy spiced potato &amp; green peas)</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">₹30</span>
+</div>
+<!-- Chef Instruction Note -->
+<div class="mt-1 flex items-start gap-1.5 text-error bg-surface-container px-2.5 py-1.5 rounded-DEFAULT">
+<span class="material-symbols-outlined text-[16px] mt-0.5">warning</span>
+<span class="font-label-md text-label-md font-semibold">Special Kitchen Note: Extra green chutney, serve rotis piping hot directly from tawa.</span>
+</div>
+</div>
+<!-- Action Buttons for Order #1 -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-1">
+<div class="flex items-center gap-2">
+<button class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center gap-1 px-2.5 py-1.5 rounded-full hover:bg-surface-container transition-all" onclick="openDrawer('CSJ-142', 'Aryan Sharma', '1x Deluxe Veg Thali, 2x Hot Punjabi Samosa', '₹100', 'pending')">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span>Inspect Details</span>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center gap-1 px-2.5 py-1.5 rounded-full hover:bg-surface-container transition-all" onclick="triggerSoundNotification('KOT printed for Token #CSJ-142')">
+<span class="material-symbols-outlined text-[16px]">print</span>
+<span>Print KOT Slip</span>
+</button>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-md text-label-md transition-all" onclick="declineOrder('CSJ-142')">
+                  Decline
+                </button>
+<button class="px-4 py-2 rounded-full bg-primary-container text-on-primary hover:bg-primary shadow-[0_4px_12px_rgba(198,40,40,0.25)] font-label-lg text-label-lg font-bold flex items-center gap-1.5 transition-all" onclick="updateOrderStatus('CSJ-142', 'cooking')">
+<span>Accept &amp; Start Prep →</span>
+</button>
+</div>
+</div>
+</div>
+<!-- ORDER CARD #2: CSJ-145 (Cooking, Chole Bhature + Chai) -->
+<div class="order-ticket-card bg-surface-container-lowest p-space-md rounded-DEFAULT shadow-sm hover:shadow-md transition-all flex flex-col gap-space-sm" data-search="CSJ-145 priya verma 220812 mba chole bhature kulhad masala chai" data-station="thali beverage" data-status="cooking" data-token="CSJ-145">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-3">
+<div class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-DEFAULT font-headline-md text-headline-md tracking-wider flex items-center gap-1">
+<span>#CSJ-145</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-title-sm text-title-sm text-on-surface font-bold">Priya Verma</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Roll #220812 • MBA (Executive)</span>
+</div>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="font-label-md text-label-md text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 7 mins ago (1:11 PM)
+                    </span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="font-label-md text-label-md text-on-secondary-container bg-secondary-container/20 px-2 py-0.2 rounded-full font-semibold">Campus Smart Card</span>
+</div>
+</div>
+</div>
+<!-- Status Badge & Active Kitchen Timer -->
+<div class="flex items-center gap-2">
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container/20 text-on-secondary-container font-label-md text-label-md font-bold">
+<span class="material-symbols-outlined text-[16px] animate-spin">cyclone</span>
+<span>In Cooking (04:12 elapsed)</span>
+</div>
+<span class="font-label-price text-label-price text-primary">₹110</span>
+</div>
+</div>
+<!-- Ordered Food Items Breakdown -->
+<div class="bg-surface-container-low p-space-sm rounded-DEFAULT flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-body-md text-body-md">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded bg-primary-container text-on-primary flex items-center justify-center font-bold text-xs">2</span>
+<span class="font-semibold text-on-surface">Chole Bhature (2 pcs plate)</span>
+<span class="text-on-surface-variant text-xs">(Amritsari Pindi Chole, 2 fluffy bhature, pickle &amp; onion salad)</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">₹100</span>
+</div>
+<div class="flex items-center justify-between font-body-md text-body-md">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded bg-primary-container text-on-primary flex items-center justify-center font-bold text-xs">1</span>
+<span class="font-semibold text-on-surface">Kulhad Masala Chai</span>
+<span class="text-on-surface-variant text-xs">(Adrak Elaichi special in earthen clay cup)</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">₹10</span>
+</div>
+<!-- Chef Instruction Note -->
+<div class="mt-1 flex items-start gap-1.5 text-on-surface-variant bg-surface-container px-2.5 py-1.5 rounded-DEFAULT">
+<span class="material-symbols-outlined text-[16px] text-secondary">info</span>
+<span class="font-label-md text-label-md">Special Note: Less spicy chole please, extra pickled ginger on side.</span>
+</div>
+</div>
+<!-- Action Buttons for Order #2 -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-1">
+<div class="flex items-center gap-2">
+<button class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center gap-1 px-2.5 py-1.5 rounded-full hover:bg-surface-container transition-all" onclick="openDrawer('CSJ-145', 'Priya Verma', '2x Chole Bhature, 1x Kulhad Masala Chai', '₹110', 'cooking')">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span>Inspect</span>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center gap-1 px-2.5 py-1.5 rounded-full hover:bg-surface-container transition-all" onclick="triggerSoundNotification('KOT reprinted for #CSJ-145')">
+<span class="material-symbols-outlined text-[16px]">print</span>
+<span>Reprint KOT</span>
+</button>
+</div>
+<div class="flex items-center gap-2">
+<select class="bg-surface-container text-on-surface px-3 py-1.5 rounded-full font-label-md text-label-md cursor-pointer outline-none" onchange="updateOrderStatus('CSJ-145', this.value)">
+<option selected="" value="cooking">Status: Cooking</option>
+<option value="ready">Move to: Ready</option>
+<option value="pending">Move to: Pending</option>
+<option value="completed">Move to: Completed</option>
+</select>
+<button class="px-4 py-2 rounded-full bg-secondary-container text-on-secondary-container hover:bg-secondary-fixed-dim font-label-lg text-label-lg font-bold flex items-center gap-1.5 shadow-sm transition-all" onclick="updateOrderStatus('CSJ-145', 'ready')">
+<span class="material-symbols-outlined text-[18px]">check</span>
+<span>Mark Ready for Pickup ✓</span>
+</button>
+</div>
+</div>
+</div>
+<!-- ORDER CARD #3: CSJ-139 (Ready for Pickup, Kathi Roll + Cold Coffee) -->
+<div class="order-ticket-card bg-surface-container-lowest p-space-md rounded-DEFAULT shadow-sm hover:shadow-md transition-all flex flex-col gap-space-sm" data-search="CSJ-139 rahul mishra 190334 bca paneer kathi roll cold coffee" data-station="rolls beverage" data-status="ready" data-token="CSJ-139">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-3">
+<div class="bg-surface-container-highest text-on-surface px-3 py-1 rounded-DEFAULT font-headline-md text-headline-md tracking-wider flex items-center gap-1">
+<span>#CSJ-139</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-title-sm text-title-sm text-on-surface font-bold">Rahul Mishra</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Roll #190334 • BCA 3rd Yr</span>
+</div>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="font-label-md text-label-md text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 12 mins ago (Ready for 3m)
+                    </span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="font-label-md text-label-md text-on-tertiary-fixed bg-tertiary-fixed px-2 py-0.2 rounded-full font-semibold">PhonePe UPI</span>
+</div>
+</div>
+</div>
+<!-- Status Badge -->
+<div class="flex items-center gap-2">
+<span class="px-3 py-1 rounded-full bg-secondary-container/20 text-on-secondary-container font-label-md text-label-md font-bold flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+                  Ready at Shelf #2
+                </span>
+<span class="font-label-price text-label-price text-primary">₹100</span>
+</div>
+</div>
+<!-- Ordered Food Items Breakdown -->
+<div class="bg-surface-container-low p-space-sm rounded-DEFAULT flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-body-md text-body-md">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded bg-primary-container text-on-primary flex items-center justify-center font-bold text-xs">1</span>
+<span class="font-semibold text-on-surface">Paneer Tikka Kathi Roll</span>
+<span class="text-on-surface-variant text-xs">(Charred cottage cheese cubes, mint dip, paratha wrap)</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">₹60</span>
+</div>
+<div class="flex items-center justify-between font-body-md text-body-md">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded bg-primary-container text-on-primary flex items-center justify-center font-bold text-xs">1</span>
+<span class="font-semibold text-on-surface">Cold Coffee with Vanilla Scoop</span>
+<span class="text-on-surface-variant text-xs">(Thick blended cold coffee with chocolate drizzle)</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">₹40</span>
+</div>
+<!-- Chef Instruction Note -->
+<div class="mt-1 flex items-start gap-1.5 text-on-surface-variant bg-surface-container px-2.5 py-1.5 rounded-DEFAULT">
+<span class="material-symbols-outlined text-[16px] text-secondary">info</span>
+<span class="font-label-md text-label-md">Special Note: Strictly no onions in roll. Extra tissue napkins requested.</span>
+</div>
+</div>
+<!-- Action Buttons for Order #3 -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-1">
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1.5 transition-all" onclick="pingStudentPhone('Rahul Mishra', '+91 98380 12890', 'CSJ-139')">
+<span class="material-symbols-outlined text-[16px] text-primary">sms</span>
+<span>Send SMS Ping to Student 🔔</span>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center gap-1 px-2.5 py-1.5 rounded-full hover:bg-surface-container transition-all" onclick="callTokenOnScreen('CSJ-139')">
+<span class="material-symbols-outlined text-[16px]">campaign</span>
+<span>Chime Buzzer</span>
+</button>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-5 py-2 rounded-full bg-on-background text-inverse-on-surface hover:bg-black font-label-lg text-label-lg font-bold flex items-center gap-1.5 shadow-sm transition-all" onclick="updateOrderStatus('CSJ-139', 'completed')">
+<span class="material-symbols-outlined text-[18px]">done_all</span>
+<span>Mark Handed Over ✓✓</span>
+</button>
+</div>
+</div>
+</div>
+<!-- ORDER CARD #4: CSJ-148 (Pending, Samosa + Chai) -->
+<div class="order-ticket-card bg-surface-container-lowest p-space-md rounded-DEFAULT shadow-sm hover:shadow-md transition-all flex flex-col gap-space-sm" data-search="CSJ-148 sneha gupta 231102 b.sc bio samosa chai" data-station="fryer beverage" data-status="pending" data-token="CSJ-148">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-3">
+<div class="bg-error-container text-on-error-container px-3 py-1 rounded-DEFAULT font-headline-md text-headline-md tracking-wider flex items-center gap-1">
+<span>#CSJ-148</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-title-sm text-title-sm text-on-surface font-bold">Sneha Gupta</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Roll #231102 • B.Sc Bio (1st Yr)</span>
+</div>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="font-label-md text-label-md text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> Just Now (1:18 PM)
+                    </span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="font-label-md text-label-md text-on-surface bg-surface-container px-2 py-0.2 rounded-full font-semibold">Cash at Counter</span>
+</div>
+</div>
+</div>
+<!-- Status Badge -->
+<div class="flex items-center gap-2">
+<span class="px-3 py-1 rounded-full bg-error-container text-on-error-container font-label-md text-label-md font-bold flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+                  Pending Acceptance
+                </span>
+<span class="font-label-price text-label-price text-primary">₹65</span>
+</div>
+</div>
+<!-- Ordered Food Items Breakdown -->
+<div class="bg-surface-container-low p-space-sm rounded-DEFAULT flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-body-md text-body-md">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded bg-primary-container text-on-primary flex items-center justify-center font-bold text-xs">3</span>
+<span class="font-semibold text-on-surface">Crispy Punjabi Samosa</span>
+<span class="text-on-surface-variant text-xs">(3 pieces with tamarind &amp; mint chutney)</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">₹45</span>
+</div>
+<div class="flex items-center justify-between font-body-md text-body-md">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded bg-primary-container text-on-primary flex items-center justify-center font-bold text-xs">2</span>
+<span class="font-semibold text-on-surface">Special Masala Chai</span>
+<span class="text-on-surface-variant text-xs">(Hot ginger spiced tea)</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">₹20</span>
+</div>
+<div class="mt-1 flex items-start gap-1.5 text-on-surface-variant bg-surface-container px-2.5 py-1.5 rounded-DEFAULT">
+<span class="material-symbols-outlined text-[16px] text-secondary">info</span>
+<span class="font-label-md text-label-md">Note: Parcel packaging needed in paper bag. Lecture starts at 1:30 PM.</span>
+</div>
+</div>
+<!-- Action Buttons for Order #4 -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-1">
+<div class="flex items-center gap-2">
+<button class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center gap-1 px-2.5 py-1.5 rounded-full hover:bg-surface-container transition-all" onclick="openDrawer('CSJ-148', 'Sneha Gupta', '3x Samosa, 2x Masala Chai', '₹65', 'pending')">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span>Inspect</span>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center gap-1 px-2.5 py-1.5 rounded-full hover:bg-surface-container transition-all" onclick="triggerSoundNotification('KOT printed for Token #CSJ-148')">
+<span class="material-symbols-outlined text-[16px]">print</span>
+<span>Print KOT</span>
+</button>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-md text-label-md transition-all" onclick="declineOrder('CSJ-148')">
+                  Decline
+                </button>
+<button class="px-4 py-2 rounded-full bg-primary-container text-on-primary hover:bg-primary shadow-[0_4px_12px_rgba(198,40,40,0.25)] font-label-lg text-label-lg font-bold flex items-center gap-1.5 transition-all" onclick="updateOrderStatus('CSJ-148', 'cooking')">
+<span>Accept &amp; Start Prep →</span>
+</button>
+</div>
+</div>
+</div>
+<!-- ORDER CARD #5: CSJ-136 (Cooking, Veg Thali + Lassi) -->
+<div class="order-ticket-card bg-surface-container-lowest p-space-md rounded-DEFAULT shadow-sm hover:shadow-md transition-all flex flex-col gap-space-sm" data-search="CSJ-136 vikas patel 204511 mca deluxe veg thali lassi" data-station="thali beverage" data-status="cooking" data-token="CSJ-136">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-3">
+<div class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-DEFAULT font-headline-md text-headline-md tracking-wider flex items-center gap-1">
+<span>#CSJ-136</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-title-sm text-title-sm text-on-surface font-bold">Vikas Patel</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Roll #204511 • MCA (Final Sem)</span>
+</div>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="font-label-md text-label-md text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 9 mins ago (1:09 PM)
+                    </span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="font-label-md text-label-md text-on-secondary-fixed bg-secondary-fixed px-2 py-0.2 rounded-full font-semibold">Paytm UPI</span>
+</div>
+</div>
+</div>
+<!-- Status Badge -->
+<div class="flex items-center gap-2">
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container/20 text-on-secondary-container font-label-md text-label-md font-bold">
+<span class="material-symbols-outlined text-[16px]">cyclone</span>
+<span>Cooking (Tawa Station)</span>
+</div>
+<span class="font-label-price text-label-price text-primary">₹95</span>
+</div>
+</div>
+<!-- Ordered Food Items Breakdown -->
+<div class="bg-surface-container-low p-space-sm rounded-DEFAULT flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-body-md text-body-md">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded bg-primary-container text-on-primary flex items-center justify-center font-bold text-xs">1</span>
+<span class="font-semibold text-on-surface">Deluxe Veg Thali</span>
+<span class="text-on-surface-variant text-xs">(Dal Fry, Paneer Bhurji, 4 Phulka Rotis, Rice, Salad)</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">₹70</span>
+</div>
+<div class="flex items-center justify-between font-body-md text-body-md">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded bg-primary-container text-on-primary flex items-center justify-center font-bold text-xs">1</span>
+<span class="font-semibold text-on-surface">Sweet Chilled Lassi</span>
+<span class="text-on-surface-variant text-xs">(Creamy Kanpur style with malai topping)</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface">₹25</span>
+</div>
+<div class="mt-1 flex items-start gap-1.5 text-error bg-surface-container px-2.5 py-1.5 rounded-DEFAULT">
+<span class="material-symbols-outlined text-[16px] mt-0.5">warning</span>
+<span class="font-label-md text-label-md font-semibold">Strict Jain Preparation: No garlic, no onions in dal and subzi!</span>
+</div>
+</div>
+<!-- Action Buttons for Order #5 -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-1">
+<div class="flex items-center gap-2">
+<button class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center gap-1 px-2.5 py-1.5 rounded-full hover:bg-surface-container transition-all" onclick="openDrawer('CSJ-136', 'Vikas Patel', '1x Veg Thali, 1x Sweet Lassi', '₹95', 'cooking')">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span>Inspect</span>
+</button>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-4 py-2 rounded-full bg-secondary-container text-on-secondary-container hover:bg-secondary-fixed-dim font-label-lg text-label-lg font-bold flex items-center gap-1.5 shadow-sm transition-all" onclick="updateOrderStatus('CSJ-136', 'ready')">
+<span class="material-symbols-outlined text-[18px]">check</span>
+<span>Mark Ready for Pickup ✓</span>
+</button>
+</div>
+</div>
+</div>
+<!-- ORDER CARD #6: CSJ-130 (Completed, Kathi Roll) -->
+<div class="order-ticket-card bg-surface-container-lowest/80 p-space-md rounded-DEFAULT shadow-sm flex flex-col gap-space-sm opacity-80 hover:opacity-100 transition-all" data-search="CSJ-130 ananya dixit 220199 ba english paneer kathi roll" data-station="rolls" data-status="completed" data-token="CSJ-130">
+<div class="flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-3">
+<div class="bg-surface-container-high text-on-surface-variant px-3 py-1 rounded-DEFAULT font-headline-md text-headline-md tracking-wider flex items-center gap-1">
+<span>#CSJ-130</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-title-sm text-title-sm text-on-surface font-bold">Ananya Dixit</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Roll #220199 • BA English</span>
+</div>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="font-label-md text-label-md text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">done_all</span> Handed over 22 mins ago (1:02 PM)
+                    </span>
+<span class="w-1 h-1 rounded-full bg-outline"></span>
+<span class="font-label-md text-label-md text-on-surface-variant bg-surface-container px-2 py-0.2 rounded-full">Smart Card</span>
+</div>
+</div>
+</div>
+<!-- Status Badge -->
+<div class="flex items-center gap-2">
+<span class="px-3 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+                  Completed &amp; Cleared
+                </span>
+<span class="font-label-price text-label-price text-on-surface-variant">₹120</span>
+</div>
+</div>
+<!-- Items -->
+<div class="bg-surface-container-low/60 p-space-sm rounded-DEFAULT flex flex-col gap-1">
+<div class="flex items-center justify-between font-body-md text-body-md text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded bg-surface-container-high text-on-surface flex items-center justify-center font-bold text-xs">2</span>
+<span>Paneer Kathi Roll Special</span>
+</div>
+<span>₹120</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Collected at Counter #2 by student</span>
+<div class="flex items-center gap-2">
+<button class="text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center gap-1 px-3 py-1 rounded-full hover:bg-surface-container transition-all" onclick="triggerSoundNotification('Re-printed receipt for CSJ-130')">
+<span class="material-symbols-outlined text-[16px]">receipt</span>
+<span>View Slip</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 3B: KANBAN BOARD VIEW (Hidden by default, toggled via View Switcher) -->
+<div class="hidden grid-cols-1 md:grid-cols-3 gap-space-md" id="orders-kanban-view">
+<!-- Column 1: Pending -->
+<div class="bg-surface-container-low p-space-md rounded-DEFAULT flex flex-col gap-space-sm">
+<div class="flex items-center justify-between pb-2 border-b-0">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-error"></span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Pending Approval</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container font-label-md text-label-md font-bold" id="kanban-pending-badge">2</span>
+</div>
+<!-- Kanban Card: CSJ-142 -->
+<div class="bg-surface-container-lowest p-space-sm rounded-DEFAULT shadow-sm flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-headline-md text-headline-md text-primary font-bold">#CSJ-142</span>
+<span class="text-xs bg-error-container text-on-error-container px-2 py-0.5 rounded-full font-bold">3m ago</span>
+</div>
+<p class="font-title-sm text-title-sm text-on-surface">Aryan Sharma</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">1x Deluxe Thali, 2x Samosa</p>
+<div class="flex items-center justify-between pt-2">
+<span class="font-label-price text-label-price text-primary">₹100</span>
+<button class="px-3 py-1 bg-primary-container text-on-primary rounded-full font-label-md text-label-md font-bold" onclick="updateOrderStatus('CSJ-142', 'cooking')">
+                  Accept →
+                </button>
+</div>
+</div>
+<!-- Kanban Card: CSJ-148 -->
+<div class="bg-surface-container-lowest p-space-sm rounded-DEFAULT shadow-sm flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-headline-md text-headline-md text-primary font-bold">#CSJ-148</span>
+<span class="text-xs bg-error-container text-on-error-container px-2 py-0.5 rounded-full font-bold">Just Now</span>
+</div>
+<p class="font-title-sm text-title-sm text-on-surface">Sneha Gupta</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">3x Crispy Samosa, 2x Chai</p>
+<div class="flex items-center justify-between pt-2">
+<span class="font-label-price text-label-price text-primary">₹65</span>
+<button class="px-3 py-1 bg-primary-container text-on-primary rounded-full font-label-md text-label-md font-bold" onclick="updateOrderStatus('CSJ-148', 'cooking')">
+                  Accept →
+                </button>
+</div>
+</div>
+</div>
+<!-- Column 2: In Preparation -->
+<div class="bg-surface-container-low p-space-md rounded-DEFAULT flex flex-col gap-space-sm">
+<div class="flex items-center justify-between pb-2 border-b-0">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-secondary-container"></span>
+<span class="font-headline-sm text-headline-sm text-on-surface">In Cooking</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-on-secondary-container font-label-md text-label-md font-bold">2</span>
+</div>
+<!-- Kanban Card: CSJ-145 -->
+<div class="bg-surface-container-lowest p-space-sm rounded-DEFAULT shadow-sm flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-headline-md text-headline-md text-secondary font-bold">#CSJ-145</span>
+<span class="text-xs bg-secondary-container/30 text-on-secondary-container px-2 py-0.5 rounded-full font-bold">04:12 elapsed</span>
+</div>
+<p class="font-title-sm text-title-sm text-on-surface">Priya Verma</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">2x Chole Bhature, 1x Kulhad Chai</p>
+<div class="flex items-center justify-between pt-2">
+<span class="font-label-price text-label-price text-secondary">₹110</span>
+<button class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full font-label-md text-label-md font-bold" onclick="updateOrderStatus('CSJ-145', 'ready')">
+                  Ready ✓
+                </button>
+</div>
+</div>
+<!-- Kanban Card: CSJ-136 -->
+<div class="bg-surface-container-lowest p-space-sm rounded-DEFAULT shadow-sm flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-headline-md text-headline-md text-secondary font-bold">#CSJ-136</span>
+<span class="text-xs bg-secondary-container/30 text-on-secondary-container px-2 py-0.5 rounded-full font-bold">9m ago</span>
+</div>
+<p class="font-title-sm text-title-sm text-on-surface">Vikas Patel</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">1x Deluxe Veg Thali, 1x Lassi</p>
+<div class="flex items-center justify-between pt-2">
+<span class="font-label-price text-label-price text-secondary">₹95</span>
+<button class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full font-label-md text-label-md font-bold" onclick="updateOrderStatus('CSJ-136', 'ready')">
+                  Ready ✓
+                </button>
+</div>
+</div>
+</div>
+<!-- Column 3: Ready for Collection -->
+<div class="bg-surface-container-low p-space-md rounded-DEFAULT flex flex-col gap-space-sm">
+<div class="flex items-center justify-between pb-2 border-b-0">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-outline"></span>
+<span class="font-headline-sm text-headline-sm text-on-surface">At Counter #2</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface font-label-md text-label-md font-bold">1</span>
+</div>
+<!-- Kanban Card: CSJ-139 -->
+<div class="bg-surface-container-lowest p-space-sm rounded-DEFAULT shadow-sm flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-headline-md text-headline-md text-on-surface font-bold">#CSJ-139</span>
+<span class="text-xs bg-surface-container text-on-surface px-2 py-0.5 rounded-full font-bold">Shelf #2</span>
+</div>
+<p class="font-title-sm text-title-sm text-on-surface">Rahul Mishra</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">1x Paneer Kathi Roll, 1x Cold Coffee</p>
+<div class="flex items-center justify-between pt-2">
+<span class="font-label-price text-label-price text-on-surface">₹100</span>
+<button class="px-3 py-1 bg-inverse-surface text-inverse-on-surface rounded-full font-label-md text-label-md font-bold" onclick="updateOrderStatus('CSJ-139', 'completed')">
+                  Handed Over ✓✓
+                </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- RIGHT COLUMN: SIDEBAR WIDGETS & REAL-TIME CONTROLS (4 COLS) -->
+<aside class="xl:col-span-4 flex flex-col gap-space-md">
+<!-- WIDGET 1: LIVE TOKEN CALL DISPLAY (COUNTER #2) -->
+<div class="bg-surface-container-lowest p-space-md rounded-DEFAULT shadow-sm flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[22px]">tv</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Overhead Token Call Display</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-full">Window #2</span>
+</div>
+<!-- Screen Simulation -->
+<div class="bg-inverse-surface text-inverse-on-surface p-space-md rounded-DEFAULT shadow-inner flex flex-col gap-3">
+<div class="flex items-center justify-between text-xs text-on-surface-variant uppercase tracking-wider font-bold">
+<span>Campus Dining PA Audio: Live</span>
+<span class="text-secondary-fixed flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed animate-ping"></span> Sync Online
+              </span>
+</div>
+<!-- Big Tokens Called -->
+<div class="text-center py-2 bg-black/40 rounded-DEFAULT">
+<div class="font-body-sm text-body-sm text-inverse-on-surface/70 uppercase tracking-widest font-semibold">Now Serving Token</div>
+<div class="font-headline-hero text-headline-hero text-secondary-fixed tracking-widest mt-1" id="pa-active-token">
+                #CSJ-139
+              </div>
+<div class="text-xs text-inverse-on-surface/80 mt-1">Collect at Express Window #2</div>
+</div>
+<!-- Upcoming Queue List -->
+<div class="flex items-center justify-between pt-2 border-t-0 text-sm">
+<span class="text-xs text-inverse-on-surface/70">Next Tokens in Line:</span>
+<div class="flex items-center gap-2 font-headline-sm text-headline-sm tracking-wider text-inverse-on-surface">
+<span class="bg-white/10 px-2 py-0.5 rounded">#137</span>
+<span class="bg-white/10 px-2 py-0.5 rounded">#145</span>
+<span class="bg-white/10 px-2 py-0.5 rounded">#142</span>
+</div>
+</div>
+</div>
+<!-- Actions for Sound & Announcement -->
+<div class="grid grid-cols-2 gap-space-sm">
+<button class="px-3 py-2 bg-surface-container hover:bg-surface-container-high text-on-surface rounded-DEFAULT font-label-md text-label-md font-bold flex items-center justify-center gap-1.5 transition-all" onclick="dingTokenBuzzer()">
+<span class="material-symbols-outlined text-[18px] text-primary">notifications</span>
+<span>Ding PA Chime</span>
+</button>
+<button class="px-3 py-2 bg-primary-container text-on-primary hover:bg-primary rounded-DEFAULT font-label-md text-label-md font-bold flex items-center justify-center gap-1.5 transition-all shadow-[0_2px_8px_rgba(198,40,40,0.2)]" onclick="speakNextToken()">
+<span class="material-symbols-outlined text-[18px]">record_voice_over</span>
+<span>Voice Announce</span>
+</button>
+</div>
+</div>
+<!-- WIDGET 2: QUICK ITEM STOCK / "86" TOGGLE PANEL -->
+<div class="bg-surface-container-lowest p-space-md rounded-DEFAULT shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">inventory_2</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Fast Menu Stock Toggles</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant font-semibold">Immediate 86</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Flip off to instantly disable items on the CSJMU Student Mobile App.</p>
+<div class="flex flex-col gap-2.5 mt-1">
+<!-- Item 1: Veg Thali -->
+<div class="flex items-center justify-between p-2.5 bg-surface-container-low rounded-DEFAULT">
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Deluxe Veg Thali</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">₹70 • 14 plates remaining</span>
+</div>
+<button class="stock-toggle px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md font-bold flex items-center gap-1 transition-all" onclick="toggleItemStock(this, 'Deluxe Veg Thali')">
+<span>In Stock</span>
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</button>
+</div>
+<!-- Item 2: Hot Samosa -->
+<div class="flex items-center justify-between p-2.5 bg-surface-container-low rounded-DEFAULT">
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Hot Punjabi Samosa</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">₹15 • 38 pieces batch ready</span>
+</div>
+<button class="stock-toggle px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md font-bold flex items-center gap-1 transition-all" onclick="toggleItemStock(this, 'Hot Punjabi Samosa')">
+<span>In Stock</span>
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</button>
+</div>
+<!-- Item 3: Paneer Kathi Roll (LOW STOCK) -->
+<div class="flex items-center justify-between p-2.5 bg-surface-container-low rounded-DEFAULT">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-title-sm text-title-sm text-on-surface font-semibold">Paneer Kathi Roll</span>
+<span class="bg-error-container text-on-error-container text-xs px-1.5 py-0.2 rounded font-bold">LOW (3 left)</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">₹60 • Fresh paneer stock low</span>
+</div>
+<button class="stock-toggle px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md font-bold flex items-center gap-1 transition-all" onclick="toggleItemStock(this, 'Paneer Kathi Roll')">
+<span>In Stock</span>
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+</button>
+</div>
+<!-- Item 4: Cold Coffee (SOLD OUT) -->
+<div class="flex items-center justify-between p-2.5 bg-surface-container rounded-DEFAULT opacity-70">
+<div class="flex flex-col">
+<span class="font-title-sm text-title-sm text-on-surface line-through font-semibold">Cold Coffee w/ Ice Cream</span>
+<span class="font-body-sm text-body-sm text-error font-medium">Sold Out (Milk restock pending)</span>
+</div>
+<button class="stock-toggle px-3 py-1 rounded-full bg-surface-container-high text-on-surface-variant font-label-md text-label-md font-bold flex items-center gap-1 transition-all" onclick="toggleItemStock(this, 'Cold Coffee')">
+<span>Disabled</span>
+<span class="material-symbols-outlined text-[16px]">block</span>
+</button>
+</div>
+</div>
+</div>
+<!-- WIDGET 3: KITCHEN STATION LOAD & CAPACITY MONITOR -->
+<div class="bg-surface-container-lowest p-space-md rounded-DEFAULT shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface">Kitchen Station Loads</span>
+<span class="font-label-md text-label-md text-secondary font-bold">Chef Ramesh K.</span>
+</div>
+<!-- Station 1: Tawa / Thali Range -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<span class="text-on-surface font-semibold">Main Curry &amp; Tawa Station</span>
+<span class="text-error font-bold">88% Peak</span>
+</div>
+<div class="w-full bg-surface-container-low h-2.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full transition-all duration-500" style="width: 88%;"></div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">7 thalis in queue • 4 burners engaged</span>
+</div>
+<!-- Station 2: Fryer Station -->
+<div class="flex flex-col gap-1 mt-1">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<span class="text-on-surface font-semibold">Snack Fryer &amp; Samosa Vat</span>
+<span class="text-secondary font-bold">75% High</span>
+</div>
+<div class="w-full bg-surface-container-low h-2.5 rounded-full overflow-hidden">
+<div class="bg-secondary-container h-full rounded-full transition-all duration-500" style="width: 75%;"></div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Batch #4 Samosas in oil (2 mins left)</span>
+</div>
+<!-- Station 3: Beverage Counter -->
+<div class="flex flex-col gap-1 mt-1">
+<div class="flex items-center justify-between font-label-md text-label-md">
+<span class="text-on-surface font-semibold">Beverage &amp; Chai Bar</span>
+<span class="text-on-surface-variant font-bold">30% Optimal</span>
+</div>
+<div class="w-full bg-surface-container-low h-2.5 rounded-full overflow-hidden">
+<div class="bg-outline h-full rounded-full transition-all duration-500" style="width: 30%;"></div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Kulhad chai pot simmering • No backlogs</span>
+</div>
+</div>
+<!-- WIDGET 4: CAMPUS CHEF QUICK SLIP NOTE -->
+<div class="bg-surface-container-low p-space-md rounded-DEFAULT flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-lg text-label-lg text-on-surface font-bold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-primary">edit_note</span>
+              Kitchen Whiteboard
+            </span>
+<span class="text-xs text-on-surface-variant">Auto-clears at 4 PM</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant bg-surface-container-lowest p-2 rounded-DEFAULT shadow-xs">
+            "B.Tech 3rd Yr exams finish at 1:30 PM. Expect surge of ~40 Chai &amp; Samosa tokens between 1:35 and 2:00 PM. Keep 2 batches ready in warming showcase."
+          </p>
+</div>
+</aside>
+</div>
+</div>
+<!-- SECTION 4: SLIDE-OVER INSPECTION DRAWER / MODAL -->
+<div class="fixed inset-0 z-50 pointer-events-none transition-all duration-300" id="order-drawer">
+<!-- Backdrop -->
+<div class="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300" id="drawer-backdrop" onclick="closeDrawer()"></div>
+<!-- Drawer Panel -->
+<div class="absolute right-0 top-0 bottom-0 w-full max-w-lg bg-surface-container-lowest shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col justify-between p-space-lg overflow-y-auto" id="drawer-content">
+<div class="flex flex-col gap-space-md">
+<!-- Drawer Header -->
+<div class="flex items-center justify-between pb-3 bg-surface-container-lowest">
+<div class="flex items-center gap-2">
+<span class="bg-primary text-on-primary font-headline-md text-headline-md px-3 py-1 rounded-DEFAULT tracking-wider" id="drawer-token-badge">#CSJ-142</span>
+<div>
+<div class="font-title-sm text-title-sm text-on-surface font-bold" id="drawer-student-name">Aryan Sharma</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Full Ticket Inspector</div>
+</div>
+</div>
+<button class="p-2 rounded-full hover:bg-surface-container-low text-on-surface-variant" onclick="closeDrawer()">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Stepper State Timeline -->
+<div class="bg-surface-container-low p-space-md rounded-DEFAULT flex flex-col gap-2">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider font-bold">One-Click Status Stepper</span>
+<div class="flex items-center justify-between relative mt-2">
+<!-- Progress Line -->
+<div class="absolute left-4 right-4 top-1/2 -translate-y-1/2 h-1 bg-surface-container z-0"></div>
+<!-- Step 1: Pending -->
+<button class="relative z-10 flex flex-col items-center gap-1 group" onclick="stepperSetStatus('pending')">
+<span class="w-8 h-8 rounded-full bg-primary text-on-primary font-bold text-xs flex items-center justify-center shadow-md" id="step-pill-pending">1</span>
+<span class="font-label-md text-label-md text-on-surface font-bold">Pending</span>
+</button>
+<!-- Step 2: Cooking -->
+<button class="relative z-10 flex flex-col items-center gap-1 group" onclick="stepperSetStatus('cooking')">
+<span class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant font-bold text-xs flex items-center justify-center" id="step-pill-cooking">2</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-medium">Cooking</span>
+</button>
+<!-- Step 3: Ready -->
+<button class="relative z-10 flex flex-col items-center gap-1 group" onclick="stepperSetStatus('ready')">
+<span class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant font-bold text-xs flex items-center justify-center" id="step-pill-ready">3</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-medium">Ready</span>
+</button>
+<!-- Step 4: Cleared -->
+<button class="relative z-10 flex flex-col items-center gap-1 group" onclick="stepperSetStatus('completed')">
+<span class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface-variant font-bold text-xs flex items-center justify-center" id="step-pill-completed">4</span>
+<span class="font-label-md text-label-md text-on-surface-variant font-medium">Done</span>
+</button>
+</div>
+</div>
+<!-- Ticket Items Summary -->
+<div class="flex flex-col gap-2">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider font-bold">Items &amp; Kitchen Specifications</span>
+<div class="bg-surface-container-low p-space-md rounded-DEFAULT flex flex-col gap-2" id="drawer-items-list">
+<!-- Populated dynamically via JS -->
+<div class="flex justify-between font-body-md text-body-md text-on-surface">
+<span>1x Deluxe Veg Thali</span>
+<span class="font-bold">₹70</span>
+</div>
+<div class="flex justify-between font-body-md text-body-md text-on-surface">
+<span>2x Hot Punjabi Samosa</span>
+<span class="font-bold">₹30</span>
+</div>
+</div>
+</div>
+<!-- Quick Chef Notes Input -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-md text-label-md text-on-surface font-bold">Internal Staff Note</label>
+<input class="w-full px-3 py-2 bg-surface-container-low rounded-DEFAULT text-on-surface font-body-sm text-body-sm outline-none focus:bg-surface-container" placeholder="e.g. Samosas packaged separately, handed 1 extra chutney" type="text"/>
+</div>
+<!-- Quick Hardware Actions -->
+<div class="flex flex-col gap-2 pt-2">
+<button class="w-full py-2.5 px-4 rounded-DEFAULT bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md font-bold flex items-center justify-center gap-2 transition-all" onclick="triggerSoundNotification('Thermal KOT Printed')">
+<span class="material-symbols-outlined text-[18px]">print</span>
+<span>Reprint 3-Inch Thermal Kitchen Slip</span>
+</button>
+<button class="w-full py-2.5 px-4 rounded-DEFAULT bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md font-bold flex items-center justify-center gap-2 transition-all" onclick="dingTokenBuzzer()">
+<span class="material-symbols-outlined text-[18px] text-primary">campaign</span>
+<span>Display Token on Overhead Campus Display</span>
+</button>
+</div>
+</div>
+<!-- Drawer Footer Actions -->
+<div class="pt-space-md flex items-center gap-space-sm bg-surface-container-lowest">
+<button class="flex-1 py-3 px-4 rounded-full bg-surface-container hover:bg-surface-container-high text-on-surface font-label-lg text-label-lg transition-all" onclick="closeDrawer()">
+          Close Inspector
+        </button>
+<button class="flex-1 py-3 px-4 rounded-full bg-primary-container text-on-primary hover:bg-primary font-label-lg text-label-lg font-bold shadow-md transition-all" onclick="applyDrawerUpdate()">
+          Confirm Update
+        </button>
+</div>
+</div>
+</div>
+</div>
+<!-- INTERACTIVE SCRIPTS & STATE CONTROL -->
+<script>
+  let currentActiveDrawerToken = null;
+  let rushModeActive = false;
+  let activeFilterStatus = 'all';
+
+  // Toggle Rush Mode (+5 mins extra buffer)
+  function toggleRushMode() {
+    rushModeActive = !rushModeActive;
+    const btn = document.getElementById('rush-toggle-btn');
+    const text = document.getElementById('rush-text');
+    if (rushModeActive) {
+      btn.classList.add('bg-secondary-container', 'text-on-secondary-container');
+      btn.classList.remove('bg-surface-container', 'text-on-surface');
+      text.innerText = 'Rush Active (+5m Buffer)';
+      showToast('⚠️ Rush Hour Mode Active: +5 mins buffer signaled on student app', 'bolt');
+    } else {
+      btn.classList.remove('bg-secondary-container', 'text-on-secondary-container');
+      btn.classList.add('bg-surface-container', 'text-on-surface');
+      text.innerText = 'Rush Buffer (+5m)';
+      showToast('Standard kitchen prep times resumed', 'check_circle');
+    }
+  }
+
+  // Toast Notification Controller
+  function showToast(msg, icon = 'notifications_active') {
+    const toast = document.getElementById('kitchen-toast');
+    const toastMsg = document.getElementById('toast-msg');
+    const toastIcon = document.getElementById('toast-icon');
+
+    toastMsg.innerText = msg;
+    toastIcon.innerText = icon;
+
+    toast.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    setTimeout(() => {
+      toast.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
+      toast.classList.remove('translate-y-0', 'opacity-100');
+    }, 3200);
+  }
+
+  // Trigger sound/chime simulation
+  function triggerSoundNotification(msg) {
+    showToast(msg, 'print');
+  }
+
+  function dingTokenBuzzer() {
+    showToast('🔔 Chime sounded at Window #2: Ding-Dong!', 'notifications_active');
+  }
+
+  function speakNextToken() {
+    const token = document.getElementById('pa-active-token').innerText;
+    showToast(`📢 Voice announcement: "Token ${token}, please collect your order at Counter 2"`, 'record_voice_over');
+  }
+
+  function callTokenOnScreen(token) {
+    document.getElementById('pa-active-token').innerText = '#' + token;
+    showToast(`Display updated: Now Calling #${token}`, 'tv');
+  }
+
+  function pingStudentPhone(student, phone, token) {
+    showToast(`📲 SMS & App Push sent to ${student} (${phone}): "Your order #${token} is ready at Window #2!"`, 'sms');
+  }
+
+  function announceAllReady() {
+    showToast('📢 All ready tokens broadcasted across cafeteria screens & PA systems', 'volume_up');
+  }
+
+  // Update order status directly from list ticket
+  function updateOrderStatus(tokenId, nextStatus) {
+    const card = document.querySelector(`.order-ticket-card[data-token="${tokenId}"]`);
+    if (!card) return;
+
+    card.setAttribute('data-status', nextStatus);
+
+    if (nextStatus === 'cooking') {
+      showToast(`Order #${tokenId} accepted! Moving to Cooking queue.`, 'skillet');
+    } else if (nextStatus === 'ready') {
+      showToast(`Order #${tokenId} is READY! Called to Counter #2.`, 'room_service');
+      callTokenOnScreen(tokenId);
+    } else if (nextStatus === 'completed') {
+      showToast(`Order #${tokenId} handed over and closed out ✓✓`, 'done_all');
+    }
+
+    recalcMetrics();
+  }
+
+  function declineOrder(tokenId) {
+    const card = document.querySelector(`.order-ticket-card[data-token="${tokenId}"]`);
+    if (card) {
+      card.style.display = 'none';
+      showToast(`Order #${tokenId} declined and refund processed`, 'cancel');
+      recalcMetrics();
+    }
+  }
+
+  // Recalculate KPI numbers based on DOM
+  function recalcMetrics() {
+    const cards = document.querySelectorAll('.order-ticket-card');
+    let pending = 0, cooking = 0, ready = 0, completed = 147;
+
+    cards.forEach(card => {
+      if (card.style.display !== 'none') {
+        const s = card.getAttribute('data-status');
+        if (s === 'pending') pending++;
+        if (s === 'cooking') cooking++;
+        if (s === 'ready') ready++;
+        if (s === 'completed') completed++;
+      }
+    });
+
+    document.getElementById('metric-pending-count').innerText = pending;
+    document.getElementById('metric-cooking-count').innerText = cooking;
+    document.getElementById('metric-ready-count').innerText = ready;
+    document.getElementById('badge-tab-pending').innerText = pending;
+    const kanbanP = document.getElementById('kanban-pending-badge');
+    if (kanbanP) kanbanP.innerText = pending;
+  }
+
+  // View Switcher (Table/List vs Kanban)
+  function setViewMode(mode) {
+    const listView = document.getElementById('orders-list-view');
+    const kanbanView = document.getElementById('orders-kanban-view');
+    const tableBtn = document.getElementById('view-table-btn');
+    const kanbanBtn = document.getElementById('view-kanban-btn');
+
+    if (mode === 'table') {
+      listView.classList.remove('hidden');
+      kanbanView.classList.add('hidden');
+      kanbanView.classList.remove('grid');
+
+      tableBtn.classList.add('bg-surface-container-lowest', 'text-primary', 'shadow-sm', 'font-bold');
+      tableBtn.classList.remove('text-on-surface-variant');
+
+      kanbanBtn.classList.remove('bg-surface-container-lowest', 'text-primary', 'shadow-sm', 'font-bold');
+      kanbanBtn.classList.add('text-on-surface-variant');
+    } else {
+      listView.classList.add('hidden');
+      kanbanView.classList.remove('hidden');
+      kanbanView.classList.add('grid');
+
+      kanbanBtn.classList.add('bg-surface-container-lowest', 'text-primary', 'shadow-sm', 'font-bold');
+      kanbanBtn.classList.remove('text-on-surface-variant');
+
+      tableBtn.classList.remove('bg-surface-container-lowest', 'text-primary', 'shadow-sm', 'font-bold');
+      tableBtn.classList.add('text-on-surface-variant');
+    }
+  }
+
+  // Filter by Status Tab
+  function filterByStatus(status) {
+    activeFilterStatus = status;
+    const tabs = document.querySelectorAll('.status-tab');
+    tabs.forEach(tab => {
+      if (tab.getAttribute('data-status') === status) {
+        tab.classList.add('bg-primary', 'text-on-primary', 'shadow-sm');
+        tab.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+      } else {
+        tab.classList.remove('bg-primary', 'text-on-primary', 'shadow-sm');
+        tab.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+      }
+    });
+
+    applyCombinedFilters();
+  }
+
+  // Filter by Station
+  function filterStation(stationVal) {
+    applyCombinedFilters();
+  }
+
+  // Search orders
+  function filterOrdersSearch() {
+    const input = document.getElementById('order-search-input');
+    const clearBtn = document.getElementById('clear-search-btn');
+    if (input.value.length > 0) {
+      clearBtn.classList.remove('hidden');
+    } else {
+      clearBtn.classList.add('hidden');
+    }
+    applyCombinedFilters();
+  }
+
+  function clearSearch() {
+    const input = document.getElementById('order-search-input');
+    input.value = '';
+    document.getElementById('clear-search-btn').classList.add('hidden');
+    applyCombinedFilters();
+  }
+
+  function applyCombinedFilters() {
+    const query = document.getElementById('order-search-input').value.toLowerCase().trim();
+    const station = document.getElementById('station-filter').value;
+    const cards = document.querySelectorAll('.order-ticket-card');
+
+    cards.forEach(card => {
+      const cardStatus = card.getAttribute('data-status');
+      const cardStations = card.getAttribute('data-station') || '';
+      const cardSearchText = card.getAttribute('data-search') || '';
+
+      const matchStatus = (activeFilterStatus === 'all' || cardStatus === activeFilterStatus);
+      const matchStation = (station === 'all' || cardStations.includes(station));
+      const matchQuery = (query === '' || cardSearchText.toLowerCase().includes(query));
+
+      if (matchStatus && matchStation && matchQuery) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
+  // Quick 86 / Stock Toggle
+  function toggleItemStock(btn, itemName) {
+    const isAvailable = btn.innerText.includes('In Stock');
+    if (isAvailable) {
+      btn.classList.remove('bg-secondary-container', 'text-on-secondary-container');
+      btn.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+      btn.innerHTML = '<span>Disabled</span><span class="material-symbols-outlined text-[16px]">block</span>';
+      showToast(`🚫 "${itemName}" marked as SOLD OUT (86) on student app!`, 'block');
+    } else {
+      btn.classList.add('bg-secondary-container', 'text-on-secondary-container');
+      btn.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+      btn.innerHTML = '<span>In Stock</span><span class="material-symbols-outlined text-[16px]">check_circle</span>';
+      showToast(`✅ "${itemName}" restored to active student ordering!`, 'check_circle');
+    }
+  }
+
+  // Drawer Inspection Modal Controls
+  function openDrawer(token, student, items, total, status) {
+    currentActiveDrawerToken = token;
+    document.getElementById('drawer-token-badge').innerText = '#' + token;
+    document.getElementById('drawer-student-name').innerText = student;
+
+    // render items list in drawer
+    const listContainer = document.getElementById('drawer-items-list');
+    listContainer.innerHTML = items.split(', ').map(it => `
+      <div class="flex justify-between font-body-md text-body-md text-on-surface py-1 border-b-0">
+        <span>${it}</span>
+        <span class="font-bold text-primary">Prepaid</span>
+      </div>
+    `).join('') + `
+      <div class="flex justify-between font-title-sm text-title-sm text-on-surface pt-2 mt-1 border-t-0 font-bold">
+        <span>Total Bill</span>
+        <span class="text-primary">${total}</span>
+      </div>
+    `;
+
+    stepperHighlight(status);
+
+    const drawer = document.getElementById('order-drawer');
+    const backdrop = document.getElementById('drawer-backdrop');
+    const content = document.getElementById('drawer-content');
+
+    drawer.classList.remove('pointer-events-none');
+    backdrop.classList.add('opacity-100');
+    content.classList.remove('translate-x-full');
+  }
+
+  function closeDrawer() {
+    const drawer = document.getElementById('order-drawer');
+    const backdrop = document.getElementById('drawer-backdrop');
+    const content = document.getElementById('drawer-content');
+
+    backdrop.classList.remove('opacity-100');
+    content.classList.add('translate-x-full');
+    setTimeout(() => {
+      drawer.classList.add('pointer-events-none');
+    }, 300);
+  }
+
+  function stepperSetStatus(status) {
+    stepperHighlight(status);
+    if (currentActiveDrawerToken) {
+      updateOrderStatus(currentActiveDrawerToken, status);
+    }
+  }
+
+  function stepperHighlight(status) {
+    const steps = ['pending', 'cooking', 'ready', 'completed'];
+    const idx = steps.indexOf(status);
+
+    steps.forEach((st, i) => {
+      const pill = document.getElementById('step-pill-' + st);
+      if (pill) {
+        if (i <= idx) {
+          pill.classList.add('bg-primary', 'text-on-primary');
+          pill.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+        } else {
+          pill.classList.remove('bg-primary', 'text-on-primary');
+          pill.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+        }
+      }
+    });
+  }
+
+  function applyDrawerUpdate() {
+    closeDrawer();
+    showToast(`Order details updated for #${currentActiveDrawerToken}`, 'check');
+  }
+
+  function reloadOrdersSim() {
+    showToast('Syncing with central campus database... Up to date!', 'sync');
+  }
+
+  // Auto-Accept Countdown simulator
+  let seconds = 48;
+  setInterval(() => {
+    seconds--;
+    if (seconds <= 0) seconds = 60;
+    const elem = document.getElementById('auto-timer');
+    if (elem) {
+      elem.innerText = '00:' + (seconds < 10 ? '0' + seconds : seconds);
+    }
+  }, 1000);
+</script></main></div></body></html>
