@@ -2,57 +2,44 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   signOut,
-  onAuthStateChanged
+  onAuthStateChanged,
 } from "firebase/auth";
 import { doc, getDoc, setDoc, onSnapshot } from "firebase/firestore";
 import { auth, db } from "./firebase";
 
-// Firestore collection name for user data
 const USERS_COLLECTION = "users";
 
-/**
- * Log in with Google Popup.
- */
+/** Log in with a Google popup. */
 export async function loginWithGoogle() {
+  const provider = new GoogleAuthProvider();
+  provider.setCustomParameters({ prompt: "select_account" });
+
   try {
-    const provider = new GoogleAuthProvider();
-    provider.setCustomParameters({ prompt: "select_account" });
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
-
-    // Fetch existing user profile & role from Firestore
-    const userProfile = await getUserProfileFromFirestore(user.uid);
-    return { user, profile: userProfile };
+    const profile = await getUserProfileFromFirestore(user.uid);
+    return { user, profile };
   } catch (error) {
+    if (
+      error.code === "auth/popup-closed-by-user" ||
+      error.code === "auth/cancelled-popup-request"
+    ) {
+      throw new Error("Login cancelled.");
+    }
     console.error("Google Login Error:", error);
     throw error;
   }
 }
 
-/**
- * Log out from Firebase.
- */
 export async function logoutFromFirebase() {
-  try {
-    await signOut(auth);
-  } catch (error) {
-    console.error("Logout Error:", error);
-    throw error;
-  }
+  await signOut(auth);
 }
 
-/**
- * Fetch user data from Firestore collection 'users'.
- */
+/** Read the user's own profile. Returns null if it doesn't exist yet. */
 export async function getUserProfileFromFirestore(uid) {
   try {
-    const userDocRef = doc(db, USERS_COLLECTION, uid);
-    const docSnap = await getDoc(userDocRef);
-
-    if (docSnap.exists()) {
-      return docSnap.data();
-    }
-    return null;
+    const snap = await getDoc(doc(db, USERS_COLLECTION, uid));
+    return snap.exists() ? snap.data() : null;
   } catch (error) {
     console.warn("Could not fetch user profile from Firestore:", error.message);
     return null;
@@ -60,81 +47,36 @@ export async function getUserProfileFromFirestore(uid) {
 }
 
 /**
- * Save or update user data in Firestore collection 'users'.
- * Stores:
- * - uid: User unique ID
- * - email: Google email
- * - displayName: User name
- * - photoURL: Avatar image
- * - role: "student" | "staff"
- * - staffId: Staff ID number (required for staff, null for student)
- * - updatedAt: ISO string
+ * Save basic profile info. Roles are NOT stored here:
+ * staff status comes from the /admins list in the database,
+ * and the Firestore rules reject any attempt to write "role".
  */
 export async function saveUserProfileToFirestore(uid, userData) {
-  try {
-    const userDocRef = doc(db, USERS_COLLECTION, uid);
-    const dataToSave = {
-      uid: uid,
-      email: userData.email || "",
-      displayName: userData.displayName || "CSJMU User",
-      photoURL: userData.photoURL || "",
-      role: userData.role || "student", // default student
-      staffId: userData.role === "staff" ? (userData.staffId || "").trim() : null,
-      updatedAt: new Date().toISOString()
-    };
-
-    await setDoc(userDocRef, dataToSave, { merge: true });
-    return dataToSave;
-  } catch (error) {
-    console.warn("Could not save user profile to Firestore (using local state):", error.message);
-    return userData;
-  }
+  const data = {
+    uid,
+    email: userData.email || "",
+    displayName: userData.displayName || "CSJMU User",
+    photoURL: userData.photoURL || "",
+    updatedAt: new Date().toISOString(),
+  };
+  await setDoc(doc(db, USERS_COLLECTION, uid), data, { merge: true });
+  return data;
 }
 
-/**
- * Validate Staff ID number.
- * Only the exact code "stuff001" is accepted as a valid staff ID.
- */
-export function validateStaffId(staffId) {
-  if (!staffId || typeof staffId !== "string") return false;
-  return staffId.trim() === "stuff001";
-}
-
-/**
- * Subscribe to Auth State changes.
- */
+/** Calls back with the Firebase user (or null). */
 export function subscribeToAuthState(callback) {
-  return onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      const profile = await getUserProfileFromFirestore(user.uid);
-      callback(user, profile);
-    } else {
-      callback(null, null);
-    }
-  });
+  return onAuthStateChanged(auth, (user) => callback(user));
 }
 
-/**
- * Realtime listener for user profile changes from Firestore.
- */
-export function subscribeToUserProfile(uid, callback) {
+/** Realtime listener for the user's profile. */
+export function subscribeToUserProfile(uid, callback, onError) {
   if (!uid) return () => {};
-  try {
-    const userDocRef = doc(db, USERS_COLLECTION, uid);
-    return onSnapshot(
-      userDocRef,
-      (docSnap) => {
-        if (docSnap.exists()) {
-          callback(docSnap.data());
-        }
-      },
-      (error) => {
-        console.warn("Firestore user realtime listener warning:", error.message);
-      }
-    );
-  } catch (err) {
-    console.warn("Could not attach user profile listener:", err);
-    return () => {};
-  }
+  return onSnapshot(
+    doc(db, USERS_COLLECTION, uid),
+    (snap) => callback(snap.exists() ? snap.data() : null),
+    (error) => {
+      console.warn("Firestore user realtime listener warning:", error.message);
+      if (onError) onError(error);
+    }
+  );
 }
-

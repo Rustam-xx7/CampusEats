@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "firebase": "^13.0.0",
+    "firebase-admin": "^14.5.0",
     "next": "16.4.0",
     "razorpay": "^2.9.8",
     "react": "19.3.0",
