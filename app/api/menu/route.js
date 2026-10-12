@@ -6,6 +6,7 @@ import {
   seedMenuToFirebase
 } from "@/server/menu";
 
+
 export async function GET() {
   try {
     const menu = await getMenuFromFirebase();
