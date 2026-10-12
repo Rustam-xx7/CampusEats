@@ -44,7 +44,7 @@ export default function Header() {
           <img
             alt="CSJMU Logo"
             className="h-9 w-auto object-contain"
-            src="https://lh3.googleusercontent.com/aida/AEtjO1Ue2iK4qEgYI5XQE6GNTZ4-tX9MvmKGqzC5uiR1PD-xWmeWWlnhqL1QL1BOFpe9wgiaXefHWMDb4V30p7m84TlaRr5gZGJ2XMPsgW5CmjD7e8dBIds4X8Yw8IvSwAPr-7AjinK9lguPJ2qc_8z6Bey6rTIDQZVfSiWNzr8l3mSLRBHK2NosHX1jFFkf6YYA6UlpSqtE8RuolF-A_pucXzRNnQKfocmJWFAp7411oYcJnoR7aqGPHCs8"
+            src="/csjm-university-logo.png"
           />
           <div className="flex flex-col">
             <div className="flex items-center gap-1.5">
@@ -63,23 +63,23 @@ export default function Header() {
 
         {/* Right: Actions, Role Badges & Switch Mode */}
         <div className="flex items-center gap-2">
-          {/* Staff-Only Mode Switcher (Visible ONLY for staff after login) */}
+          {/* Staff-Only Mode Switcher (Visible ONLY for verified kitchen staff on top navbar) */}
           {isStaff && (
             <button
               onClick={() =>
                 setCurrentView(currentView === "admin" ? "home" : "admin")
               }
-              className={`px-3 py-1.5 rounded-full font-body text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm border ${
+              className={`px-3.5 py-1.5 rounded-full font-body text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm border ${
                 currentView === "admin"
                   ? "bg-[#c62828] text-white border-[#a20513] hover:bg-[#a20513]"
-                  : "bg-[#ffe9e3] text-[#a20513] border-[#f5ddd7] hover:bg-[#fbe3dc]"
+                  : "bg-[#a20513] text-white border-[#87000d] hover:bg-[#c62828] shadow-[0_2px_8px_rgba(162,5,19,0.25)]"
               }`}
             >
-              <span className="material-symbols-outlined text-[16px]">
-                {currentView === "admin" ? "smartphone" : "admin_panel_settings"}
+              <span className="material-symbols-outlined text-[17px]">
+                {currentView === "admin" ? "storefront" : "dashboard"}
               </span>
               <span>
-                {currentView === "admin" ? "Mobile Student View" : "Staff Admin Panel"}
+                {currentView === "admin" ? "Student View" : "Staff Dashboard"}
               </span>
             </button>
           )}

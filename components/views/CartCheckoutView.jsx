@@ -99,7 +99,7 @@ export default function CartCheckoutView() {
   }
 
   return (
-    <div className="flex flex-col w-full max-w-md mx-auto pb-36 pt-3 px-4 space-y-4">
+    <div className="flex flex-col w-full max-w-md mx-auto pt-3 px-4 space-y-4 pb-4">
       {/* Top Cart Header Bar */}
       <div className="flex items-center justify-between pt-1">
         <div className="flex items-center gap-2">
@@ -319,8 +319,8 @@ export default function CartCheckoutView() {
         </div>
       </div>
 
-      {/* Payment Methods Section */}
-      <div className="bg-white rounded-2xl p-4 shadow-[0_4px_16px_rgba(138,98,77,0.08)] flex flex-col gap-2.5 border border-[#f5ddd7]">
+      {/* Payment Methods Section with embedded checkout button */}
+      <div className="bg-white rounded-2xl p-4 shadow-[0_4px_16px_rgba(138,98,77,0.08)] flex flex-col gap-3 border border-[#f5ddd7] mb-28">
         <div className="flex items-center justify-between">
           <span className="font-body text-xs font-bold text-[#251915] flex items-center gap-1.5">
             <span className="material-symbols-outlined text-[#a20513] text-[20px]">
@@ -436,57 +436,57 @@ export default function CartCheckoutView() {
             <span className="material-symbols-outlined text-[14px]">check</span>
           </div>
         </div>
-      </div>
 
-      {/* Bottom Sticky Action Panel */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#fff8f6]/95 backdrop-blur-xl p-4 pb-safe border-t border-[#f5ddd7]">
-        <div className="flex flex-col gap-2 max-w-md mx-auto">
-          {/* Payment Notice / Warning Banner */}
-          {paymentNotice && (
-            <div className="p-3 bg-[#ffdad6] text-[#93000a] rounded-2xl font-body text-xs font-semibold flex items-center gap-2 shadow-xs border border-[#ffb4ab]">
-              <span className="material-symbols-outlined text-[18px] shrink-0">
-                warning
-              </span>
-              <span>{paymentNotice}</span>
-            </div>
-          )}
+        {/* Payment Notice / Warning Banner */}
+        {paymentNotice && (
+          <div className="p-3 bg-[#ffdad6] text-[#93000a] rounded-xl font-body text-xs font-semibold flex items-center gap-2 shadow-xs border border-[#ffb4ab]">
+            <span className="material-symbols-outlined text-[18px] shrink-0">
+              warning
+            </span>
+            <span>{paymentNotice}</span>
+          </div>
+        )}
 
-          <div className="flex items-center justify-between px-1">
-            <div className="flex items-center gap-1 text-[#5b403d]">
-              <span className="material-symbols-outlined text-[15px] text-[#835500]">
-                verified_user
-              </span>
-              <span className="font-body text-[11px] font-semibold">
-                Razorpay PCI-DSS Level 1 Gateway
-              </span>
-            </div>
-            <span className="font-body text-xs font-extrabold text-[#a20513]">
-              Total: ₹{cartTotal}
+        {/* Total & Secure Tag */}
+        <div className="flex items-center justify-between pt-1 px-1">
+          <div className="flex items-center gap-1 text-[#5b403d]">
+            <span className="material-symbols-outlined text-[15px] text-[#835500]">
+              verified_user
+            </span>
+            <span className="font-body text-[11px] font-semibold">
+              Razorpay PCI-DSS Level 1 Gateway
             </span>
           </div>
-
-          <button
-            disabled={isProcessing}
-            onClick={handleInitiateCheckout}
-            className="w-full bg-[#a20513] hover:bg-[#c62828] text-white py-3.5 px-6 rounded-full font-headline text-xl uppercase tracking-wide flex items-center justify-center gap-2 shadow-[0_8px_20px_rgba(198,40,40,0.28)] active:scale-[0.98] transition-all disabled:opacity-75"
-          >
-            {isProcessing ? (
-              <>
-                <span className="material-symbols-outlined animate-spin text-[20px]">
-                  sync
-                </span>
-                <span>Connecting Razorpay...</span>
-              </>
-            ) : (
-              <>
-                <span>Pay ₹{cartTotal} to Place Order</span>
-                <span className="material-symbols-outlined text-[20px]">
-                  arrow_forward
-                </span>
-              </>
-            )}
-          </button>
+          <div className="text-right">
+            <span className="font-body text-xs text-[#5b403d]">Total: </span>
+            <span className="font-headline text-xl text-[#a20513]">
+              ₹{cartTotal}
+            </span>
+          </div>
         </div>
+
+        {/* In-Flow Payment CTA Button */}
+        <button
+          disabled={isProcessing}
+          onClick={handleInitiateCheckout}
+          className="w-full bg-[#a20513] hover:bg-[#c62828] text-white py-3.5 px-6 rounded-full font-headline text-xl uppercase tracking-wide flex items-center justify-center gap-2 shadow-[0_8px_20px_rgba(198,40,40,0.28)] active:scale-[0.98] transition-all disabled:opacity-75 mt-1"
+        >
+          {isProcessing ? (
+            <>
+              <span className="material-symbols-outlined animate-spin text-[20px]">
+                sync
+              </span>
+              <span>Connecting Razorpay...</span>
+            </>
+          ) : (
+            <>
+              <span>Pay ₹{cartTotal} to Place Order</span>
+              <span className="material-symbols-outlined text-[20px]">
+                arrow_forward
+              </span>
+            </>
+          )}
+        </button>
       </div>
 
       {/* Guest Identification Gate Modal */}

@@ -3,139 +3,103 @@ import {
   doc,
   setDoc,
   getDocs,
-  updateDoc,
-  onSnapshot
+  onSnapshot,
 } from "firebase/firestore";
-import { db, ensureFirebaseAuth } from "./firebase";
+import { db } from "./firebase";
 import { initialMenuItems } from "@/data/menuData";
 
-// Firestore collection name for menu
 const MENU_COLLECTION = "menu";
 
-/**
- * Fetches menu items from Firestore.
- * If Firestore is empty, seeds with initialMenuItems.
- */
+const byId = (a, b) => (Number(a.id) || 0) - (Number(b.id) || 0);
+
+const docsToItems = (snapshot) => {
+  const items = [];
+  snapshot.forEach((d) => {
+    const data = d.data();
+    items.push({ ...data, id: data.id ?? d.id });
+  });
+  return items.sort(byId);
+};
+
+/** One-time fetch. Menu reads are public (no login needed). */
 export async function getMenuFromFirebase() {
   try {
-    await ensureFirebaseAuth();
-    const menuRef = collection(db, MENU_COLLECTION);
-    const snapshot = await getDocs(menuRef);
-
-    if (!snapshot.empty) {
-      const items = [];
-      snapshot.forEach((docSnap) => {
-        items.push({ id: docSnap.id, ...docSnap.data() });
-      });
-      items.sort((a, b) => (Number(a.id) || 0) - (Number(b.id) || 0));
-      return items;
-    }
+    const snapshot = await getDocs(collection(db, MENU_COLLECTION));
+    if (!snapshot.empty) return docsToItems(snapshot);
   } catch (error) {
-    console.warn("[Firestore Menu] Could not fetch menu from Firestore:", error.message);
+    console.warn("[Firestore Menu] Could not fetch menu:", error.message);
   }
-
-  // Fallback to initial menu items
-  return initialMenuItems;
+  return initialMenuItems; // fallback only for display
 }
 
-/**
- * Saves or updates a menu item in Firestore collection 'menu'.
- */
+/** Create or update a menu item. Admin only (enforced by Firestore rules). Throws on failure. */
 export async function saveMenuItemInFirebase(item) {
   const docId = String(item.id);
 
   const formattedItem = {
     id: item.id,
-    name: item.name,
+    name: String(item.name || "").trim(),
     description: item.description || "",
     price: Number(item.price || 0),
     originalPrice: Number(item.originalPrice || item.price || 0),
     category: item.category || "Meals",
     image: item.image || "",
-    isVeg: Boolean(item.isVeg),
-    isEgg: Boolean(item.isEgg),
+    isVeg: true,   // the whole menu is vegetarian
     prepTime: item.prepTime || "5 mins",
     rating: Number(item.rating || 4.8),
     badge: item.badge || "",
     station: item.station || "thali",
     isAvailable: item.isAvailable !== undefined ? Boolean(item.isAvailable) : true,
-    stockCount: Number(item.stockCount || 20),
-    updatedAt: new Date().toISOString()
+    stockCount: Number(item.stockCount ?? 20),
+    updatedAt: new Date().toISOString(),
   };
 
-  try {
-    await ensureFirebaseAuth();
-    const docRef = doc(db, MENU_COLLECTION, docId);
-    await setDoc(docRef, formattedItem, { merge: true });
-    console.log(`[Firestore] Menu item ${item.name} (${docId}) saved.`);
-  } catch (error) {
-    console.warn(`[Firestore Note] Menu item cached locally:`, error.message);
-  }
+  if (!formattedItem.name) throw new Error("Menu item needs a name.");
+  if (!(formattedItem.price >= 0)) throw new Error("Menu item price is invalid.");
 
+  await setDoc(doc(db, MENU_COLLECTION, docId), formattedItem, { merge: true });
   return formattedItem;
 }
 
 /**
- * Updates stock availability for a menu item in Firestore (Immediate 86 toggle).
+ * Turn an item on or off ("86" toggle). Throws on failure.
+ * setDoc+merge also works if the item was never seeded into Firestore.
+ * To create the doc from a local item, pass the full item as the third argument.
  */
-export async function updateMenuItemStockInFirebase(itemId, isAvailable) {
+export async function updateMenuItemStockInFirebase(itemId, isAvailable, fullItem = null) {
   const docId = String(itemId);
-
-  try {
-    await ensureFirebaseAuth();
-    const docRef = doc(db, MENU_COLLECTION, docId);
-    await updateDoc(docRef, {
+  await setDoc(
+    doc(db, MENU_COLLECTION, docId),
+    {
+      ...(fullItem || { id: itemId }),
       isAvailable: Boolean(isAvailable),
-      updatedAt: new Date().toISOString()
-    });
-    console.log(`[Firestore] Stock for item ${docId} set to ${isAvailable}`);
-  } catch (error) {
-    console.warn("[Firestore] Menu stock update note:", error.message);
-  }
-
-  return { id: itemId, isAvailable };
+      updatedAt: new Date().toISOString(),
+    },
+    { merge: true }
+  );
+  return { id: itemId, isAvailable: Boolean(isAvailable) };
 }
 
-/**
- * Seeds initial menu items to Firestore collection 'menu'.
- */
+/** Run once from an admin account to copy the local menu into Firestore. */
 export async function seedMenuToFirebase(menuList = initialMenuItems) {
-  try {
-    const promises = menuList.map((item) => saveMenuItemInFirebase(item));
-    await Promise.all(promises);
-    return true;
-  } catch (error) {
-    console.warn("[Firestore] Seed menu note:", error.message);
-    return false;
-  }
+  await Promise.all(menuList.map((item) => saveMenuItemInFirebase(item)));
+  return true;
 }
 
 /**
- * Realtime listener for menu updates from Firestore.
+ * Realtime menu listener. Public read, so it can start before login.
+ * onUpdate is only called when the menu has items;
+ * onError gets permission or network errors.
  */
 export function subscribeToMenuFromFirebase(onUpdate, onError) {
-  try {
-    const menuRef = collection(db, MENU_COLLECTION);
-    return onSnapshot(
-      menuRef,
-      (snapshot) => {
-        if (!snapshot.empty) {
-          const items = [];
-          snapshot.forEach((docSnap) => {
-            items.push({ id: docSnap.id, ...docSnap.data() });
-          });
-          items.sort((a, b) => (Number(a.id) || 0) - (Number(b.id) || 0));
-          onUpdate(items);
-        }
-      },
-      (error) => {
-        console.warn("Firestore menu listener note:", error.message);
-        if (onError) onError(error);
-      }
-    );
-  } catch (err) {
-    console.warn("Could not attach Firestore menu realtime listener:", err);
-    return () => {};
-  }
+  return onSnapshot(
+    collection(db, MENU_COLLECTION),
+    (snapshot) => {
+      if (!snapshot.empty) onUpdate(docsToItems(snapshot));
+    },
+    (error) => {
+      console.warn("Firestore menu listener error:", error.message);
+      if (onError) onError(error);
+    }
+  );
 }
-

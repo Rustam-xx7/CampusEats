@@ -93,13 +93,11 @@ export async function saveUserProfileToFirestore(uid, userData) {
 
 /**
  * Validate Staff ID number.
- * Can be any non-empty identifier (e.g. STAFF-101, KITCHEN-2024, CSJMU-CHEF-01).
+ * Only the exact code "stuff001" is accepted as a valid staff ID.
  */
 export function validateStaffId(staffId) {
   if (!staffId || typeof staffId !== "string") return false;
-  const trimmed = staffId.trim();
-  // Valid if at least 3 characters alphanumeric
-  return trimmed.length >= 3;
+  return staffId.trim() === "stuff001";
 }
 
 /**

@@ -9,6 +9,7 @@ export default function AdminPanel() {
     updateOrderStatus,
     menuItems,
     toggleStock,
+    addMenuItem,
     rushMode,
     setRushMode,
     setCurrentView,
@@ -71,6 +72,22 @@ export default function AdminPanel() {
 
   // Toast notification
   const [toastMsg, setToastMsg] = useState("");
+
+  // Add new menu item form state
+  const [showAddItemForm, setShowAddItemForm] = useState(false);
+  const [newItemForm, setNewItemForm] = useState({
+    name: "",
+    description: "",
+    price: "",
+    originalPrice: "",
+    category: "Meals",
+    prepTime: "10 mins",
+    badge: "New",
+    station: "thali",
+    stockCount: "20",
+    image: ""
+  });
+  const [addingItem, setAddingItem] = useState(false);
 
   const triggerToast = (msg) => {
     setToastMsg(msg);
@@ -819,7 +836,201 @@ export default function AdminPanel() {
                 </div>
               </div>
 
-              {/* WIDGET 3: KITCHEN STATION LOADS */}
+              {/* WIDGET 3: ADD NEW MENU ITEM */}
+              <div className="bg-white p-4 rounded-2xl shadow-xs border border-[#f5ddd7] space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="material-symbols-outlined text-[#a20513] text-[20px]">
+                      add_circle
+                    </span>
+                    <span className="font-headline text-xl text-[#251915] uppercase">
+                      Add New Menu Item
+                    </span>
+                  </div>
+                  <button
+                    onClick={() => setShowAddItemForm(!showAddItemForm)}
+                    className={`px-3 py-1 rounded-full font-body text-xs font-bold transition-all ${
+                      showAddItemForm
+                        ? "bg-[#ffdad6] text-[#93000a]"
+                        : "bg-[#a20513] text-white hover:bg-[#c62828]"
+                    }`}
+                  >
+                    {showAddItemForm ? "Cancel" : "+ Add Item"}
+                  </button>
+                </div>
+
+                {showAddItemForm && (
+                  <form
+                    onSubmit={async (e) => {
+                      e.preventDefault();
+                      if (!newItemForm.name.trim() || !newItemForm.price) {
+                        triggerToast("⚠️ Item name and price are required!");
+                        return;
+                      }
+                      setAddingItem(true);
+                      try {
+                        const added = await addMenuItem(newItemForm);
+                        if (added) {
+                          triggerToast(`✅ "${added.name}" added to menu!`);
+                          setShowAddItemForm(false);
+                          setNewItemForm({
+                            name: "",
+                            description: "",
+                            price: "",
+                            originalPrice: "",
+                            category: "Meals",
+                            prepTime: "10 mins",
+                            badge: "New",
+                            station: "thali",
+                            stockCount: "20",
+                            image: ""
+                          });
+                        }
+                      } catch (err) {
+                        triggerToast(`❌ Error: ${err.message}`);
+                      } finally {
+                        setAddingItem(false);
+                      }
+                    }}
+                    className="space-y-2.5"
+                  >
+                    {/* Name */}
+                    <div>
+                      <label className="font-body text-[10px] font-bold text-[#5b403d] uppercase tracking-wider">Item Name *</label>
+                      <input
+                        required
+                        type="text"
+                        value={newItemForm.name}
+                        onChange={(e) => setNewItemForm((p) => ({ ...p, name: e.target.value }))}
+                        placeholder="e.g. Aloo Poori"
+                        className="mt-0.5 w-full bg-[#fff1ed] border border-[#f5ddd7] rounded-lg px-3 py-1.5 font-body text-xs text-[#251915] outline-none focus:border-[#a20513]"
+                      />
+                    </div>
+
+                    {/* Description */}
+                    <div>
+                      <label className="font-body text-[10px] font-bold text-[#5b403d] uppercase tracking-wider">Description</label>
+                      <input
+                        type="text"
+                        value={newItemForm.description}
+                        onChange={(e) => setNewItemForm((p) => ({ ...p, description: e.target.value }))}
+                        placeholder="Short description..."
+                        className="mt-0.5 w-full bg-[#fff1ed] border border-[#f5ddd7] rounded-lg px-3 py-1.5 font-body text-xs text-[#251915] outline-none focus:border-[#a20513]"
+                      />
+                    </div>
+
+                    {/* Price row */}
+                    <div className="grid grid-cols-2 gap-2">
+                      <div>
+                        <label className="font-body text-[10px] font-bold text-[#5b403d] uppercase tracking-wider">Price (₹) *</label>
+                        <input
+                          required
+                          type="number"
+                          min="1"
+                          value={newItemForm.price}
+                          onChange={(e) => setNewItemForm((p) => ({ ...p, price: e.target.value }))}
+                          placeholder="40"
+                          className="mt-0.5 w-full bg-[#fff1ed] border border-[#f5ddd7] rounded-lg px-3 py-1.5 font-body text-xs text-[#251915] outline-none focus:border-[#a20513]"
+                        />
+                      </div>
+                      <div>
+                        <label className="font-body text-[10px] font-bold text-[#5b403d] uppercase tracking-wider">MRP (₹)</label>
+                        <input
+                          type="number"
+                          min="1"
+                          value={newItemForm.originalPrice}
+                          onChange={(e) => setNewItemForm((p) => ({ ...p, originalPrice: e.target.value }))}
+                          placeholder="50"
+                          className="mt-0.5 w-full bg-[#fff1ed] border border-[#f5ddd7] rounded-lg px-3 py-1.5 font-body text-xs text-[#251915] outline-none focus:border-[#a20513]"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Category & Station */}
+                    <div className="grid grid-cols-2 gap-2">
+                      <div>
+                        <label className="font-body text-[10px] font-bold text-[#5b403d] uppercase tracking-wider">Category</label>
+                        <select
+                          value={newItemForm.category}
+                          onChange={(e) => setNewItemForm((p) => ({ ...p, category: e.target.value }))}
+                          className="mt-0.5 w-full bg-[#fff1ed] border border-[#f5ddd7] rounded-lg px-3 py-1.5 font-body text-xs text-[#251915] outline-none focus:border-[#a20513]"
+                        >
+                          <option value="Meals">Meals</option>
+                          <option value="Snacks">Snacks</option>
+                          <option value="Rolls">Rolls</option>
+                          <option value="Drinks">Drinks</option>
+                          <option value="Desserts">Desserts</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="font-body text-[10px] font-bold text-[#5b403d] uppercase tracking-wider">Prep Time</label>
+                        <input
+                          type="text"
+                          value={newItemForm.prepTime}
+                          onChange={(e) => setNewItemForm((p) => ({ ...p, prepTime: e.target.value }))}
+                          placeholder="10 mins"
+                          className="mt-0.5 w-full bg-[#fff1ed] border border-[#f5ddd7] rounded-lg px-3 py-1.5 font-body text-xs text-[#251915] outline-none focus:border-[#a20513]"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Badge & Stock */}
+                    <div className="grid grid-cols-2 gap-2">
+                      <div>
+                        <label className="font-body text-[10px] font-bold text-[#5b403d] uppercase tracking-wider">Badge Label</label>
+                        <input
+                          type="text"
+                          value={newItemForm.badge}
+                          onChange={(e) => setNewItemForm((p) => ({ ...p, badge: e.target.value }))}
+                          placeholder="e.g. New, Trending"
+                          className="mt-0.5 w-full bg-[#fff1ed] border border-[#f5ddd7] rounded-lg px-3 py-1.5 font-body text-xs text-[#251915] outline-none focus:border-[#a20513]"
+                        />
+                      </div>
+                      <div>
+                        <label className="font-body text-[10px] font-bold text-[#5b403d] uppercase tracking-wider">Stock Count</label>
+                        <input
+                          type="number"
+                          min="0"
+                          value={newItemForm.stockCount}
+                          onChange={(e) => setNewItemForm((p) => ({ ...p, stockCount: e.target.value }))}
+                          placeholder="20"
+                          className="mt-0.5 w-full bg-[#fff1ed] border border-[#f5ddd7] rounded-lg px-3 py-1.5 font-body text-xs text-[#251915] outline-none focus:border-[#a20513]"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Veg only notice */}
+                    <div className="flex items-center gap-2 p-2 bg-[#e8f5e9] rounded-lg border border-[#a5d6a7]">
+                      <span className="w-3 h-3 rounded-full border-2 border-[#2e7d32] flex items-center justify-center shrink-0">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#2e7d32]"></span>
+                      </span>
+                      <span className="font-body text-[11px] font-semibold text-[#1b5e20]">
+                        All items are Pure Veg — no egg items allowed.
+                      </span>
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={addingItem}
+                      className="w-full py-2.5 rounded-xl bg-[#a20513] hover:bg-[#c62828] text-white font-body text-xs font-bold transition-all flex items-center justify-center gap-2 disabled:opacity-70 shadow-xs"
+                    >
+                      {addingItem ? (
+                        <>
+                          <span className="material-symbols-outlined animate-spin text-[16px]">sync</span>
+                          <span>Adding to Menu...</span>
+                        </>
+                      ) : (
+                        <>
+                          <span className="material-symbols-outlined text-[16px]">add_circle</span>
+                          <span>Add to Cafeteria Menu</span>
+                        </>
+                      )}
+                    </button>
+                  </form>
+                )}
+              </div>
+
+              {/* WIDGET 4: KITCHEN STATION LOADS */}
               <div className="bg-white p-4 rounded-2xl shadow-xs border border-[#f5ddd7] space-y-3">
                 <span className="font-headline text-xl text-[#251915] uppercase">
                   Kitchen Station Capacity
