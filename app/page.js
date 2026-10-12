@@ -4,6 +4,7 @@ import React from "react";
 import { AppProvider, useApp } from "@/context/AppContext";
 import Header from "@/components/Header";
 import BottomNav from "@/components/BottomNav";
+import AuthModal from "@/components/AuthModal";
 import HomeView from "@/components/views/HomeView";
 import MenuView from "@/components/views/MenuView";
 import CartCheckoutView from "@/components/views/CartCheckoutView";
@@ -39,14 +40,24 @@ function MainContent() {
   );
 }
 
+function CafeApp() {
+  const { isAuthModalOpen, closeAuthModal } = useApp();
+
+  return (
+    <div className="min-h-screen flex flex-col bg-[#fff8f6] font-body text-[#251915]">
+      <Header />
+      <MainContent />
+      <BottomNav />
+      <AuthModal isOpen={isAuthModalOpen} onClose={closeAuthModal} />
+    </div>
+  );
+}
+
 export default function Page() {
   return (
     <AppProvider>
-      <div className="min-h-screen flex flex-col bg-[#fff8f6] font-body text-[#251915]">
-        <Header />
-        <MainContent />
-        <BottomNav />
-      </div>
+      <CafeApp />
     </AppProvider>
   );
 }
+

@@ -11,8 +11,53 @@ export default function AdminPanel() {
     toggleStock,
     rushMode,
     setRushMode,
-    setCurrentView
+    setCurrentView,
+    isStaff,
+    openAuthModal
   } = useApp();
+
+  // Access barrier: Only verified staff can access the terminal
+  if (!isStaff) {
+    return (
+      <div className="min-h-screen bg-[#fff8f6] font-body text-[#251915] flex items-center justify-center p-6">
+        <div className="max-w-md w-full bg-white rounded-3xl p-8 border border-[#f5ddd7] shadow-xl text-center space-y-5">
+          <div className="w-20 h-20 rounded-full bg-[#ffdad6] text-[#93000a] mx-auto flex items-center justify-center shadow-inner">
+            <span className="material-symbols-outlined text-[40px]">
+              admin_panel_settings
+            </span>
+          </div>
+          <div>
+            <span className="px-2.5 py-0.5 rounded-full bg-[#ffdad6] text-[#93000a] font-body text-[10px] font-extrabold uppercase">
+              Restricted Area
+            </span>
+            <h2 className="font-headline text-3xl uppercase text-[#251915] mt-2">
+              Kitchen Staff Terminal
+            </h2>
+            <p className="font-body text-xs text-[#5b403d] mt-2 leading-relaxed">
+              This terminal is reserved exclusively for cafeteria staff members. Only verified staff with an approved Staff ID number can change order states and manage kitchen tickets.
+            </p>
+          </div>
+          <div className="space-y-2 pt-2">
+            <button
+              onClick={openAuthModal}
+              className="w-full py-3.5 rounded-full bg-[#a20513] hover:bg-[#c62828] text-white font-body text-xs font-bold shadow-md transition-all flex items-center justify-center gap-2"
+            >
+              <span className="material-symbols-outlined text-[18px]">
+                badge
+              </span>
+              <span>Verify Staff ID Number</span>
+            </button>
+            <button
+              onClick={() => setCurrentView("menu")}
+              className="w-full py-3 rounded-full bg-[#ffe9e3] hover:bg-[#fbe3dc] text-[#5b403d] font-body text-xs font-bold transition-all"
+            >
+              Back to Cafeteria Menu
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const [activeStatusFilter, setActiveStatusFilter] = useState("all");
   const [stationFilter, setStationFilter] = useState("all");
@@ -507,7 +552,7 @@ export default function AdminPanel() {
                                 {ord.studentRoll}
                               </span>
                             </div>
-                            <div className="flex items-center gap-2 mt-0.5">
+                            <div className="flex flex-wrap items-center gap-2 mt-0.5">
                               <span className="font-body text-[11px] text-[#5b403d] flex items-center gap-1">
                                 <span className="material-symbols-outlined text-[13px]">
                                   schedule
@@ -518,6 +563,17 @@ export default function AdminPanel() {
                               <span className="font-body text-[11px] text-[#835500] font-bold">
                                 {ord.paymentMethod}
                               </span>
+                              {ord.queuePosition && (
+                                <span className="bg-[#ffddb4] text-[#835500] font-body text-[10px] font-bold px-1.5 py-0.2 rounded">
+                                  Queue #{ord.queuePosition}
+                                </span>
+                              )}
+                              {ord.paymentId && (
+                                <span className="bg-[#e8f5e9] text-[#1b5e20] font-body text-[10px] font-bold px-1.5 py-0.2 rounded flex items-center gap-0.5">
+                                  <span className="material-symbols-outlined text-[12px]">verified</span>
+                                  Paid
+                                </span>
+                              )}
                             </div>
                           </div>
                         </div>

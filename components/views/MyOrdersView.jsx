@@ -96,18 +96,33 @@ export default function MyOrdersView() {
                 {/* Token Header */}
                 <div className="flex items-start justify-between gap-2 pt-1">
                   <div className="flex flex-col">
-                    <span className="font-body text-[10px] uppercase font-bold text-[#5b403d]">
-                      Pickup Token
-                    </span>
+                    <div className="flex items-center gap-1.5">
+                      <span className="font-body text-[10px] uppercase font-bold text-[#5b403d]">
+                        Pickup Token
+                      </span>
+                      {ord.queuePosition && (
+                        <span className="bg-[#ffddb4] text-[#835500] font-body text-[9px] font-bold px-1.5 py-0.2 rounded">
+                          Queue #{ord.queuePosition}
+                        </span>
+                      )}
+                    </div>
                     <span className="font-headline text-3xl text-[#a20513] leading-none mt-0.5">
                       #{ord.token}
                     </span>
                   </div>
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ffddb4] text-[#291800] shadow-xs">
-                    <span className="w-2 h-2 rounded-full bg-[#835500] animate-pulse"></span>
-                    <span className="font-body text-xs font-bold capitalize">
-                      {ord.status === "cooking" ? "Preparing Fresh" : ord.status}
-                    </span>
+                  <div className="flex flex-col items-end gap-1">
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ffddb4] text-[#291800] shadow-xs">
+                      <span className="w-2 h-2 rounded-full bg-[#835500] animate-pulse"></span>
+                      <span className="font-body text-xs font-bold capitalize">
+                        {ord.status === "cooking" ? "Preparing Fresh" : ord.status}
+                      </span>
+                    </div>
+                    {ord.paymentId && (
+                      <span className="bg-[#e8f5e9] text-[#1b5e20] font-body text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-0.5">
+                        <span className="material-symbols-outlined text-[12px]">verified</span>
+                        Razorpay Paid
+                      </span>
+                    )}
                   </div>
                 </div>
 

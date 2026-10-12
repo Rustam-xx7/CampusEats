@@ -4,7 +4,7 @@ import React from "react";
 import { useApp } from "@/context/AppContext";
 
 export default function BottomNav() {
-  const { currentView, setCurrentView, cart } = useApp();
+  const { currentView, setCurrentView, cart, isStaff } = useApp();
 
   const totalCartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -90,16 +90,18 @@ export default function BottomNav() {
             <span className="font-body text-[11px] leading-none mt-0.5">Orders</span>
           </button>
 
-          {/* Staff Admin shortcut */}
-          <button
-            onClick={() => setCurrentView("admin")}
-            className="flex-1 flex flex-col items-center justify-center h-12 text-[#5b403d] hover:text-[#a20513] transition-colors"
-          >
-            <span className="material-symbols-outlined text-[22px]">
-              admin_panel_settings
-            </span>
-            <span className="font-body text-[11px] leading-none mt-0.5">Staff</span>
-          </button>
+          {/* Staff Admin shortcut - ONLY visible to verified kitchen staff after login */}
+          {isStaff && (
+            <button
+              onClick={() => setCurrentView("admin")}
+              className="flex-1 flex flex-col items-center justify-center h-12 text-[#5b403d] hover:text-[#a20513] transition-colors"
+            >
+              <span className="material-symbols-outlined text-[22px]">
+                admin_panel_settings
+              </span>
+              <span className="font-body text-[11px] leading-none mt-0.5">Staff</span>
+            </button>
+          )}
         </div>
       </div>
     </nav>

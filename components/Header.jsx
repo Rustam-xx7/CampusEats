@@ -4,7 +4,15 @@ import React from "react";
 import { useApp } from "@/context/AppContext";
 
 export default function Header() {
-  const { currentView, setCurrentView, cart } = useApp();
+  const {
+    currentView,
+    setCurrentView,
+    cart,
+    currentUser,
+    userRole,
+    isStaff,
+    openAuthModal
+  } = useApp();
 
   const totalCartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -29,7 +37,10 @@ export default function Header() {
     <header className="fixed top-0 w-full z-50 bg-[#fff8f6]/95 backdrop-blur-xl pt-safe shadow-[0_4px_16px_rgba(138,98,77,0.08)] border-b border-[#f5ddd7]/60">
       <div className="max-w-7xl mx-auto h-16 px-4 flex items-center justify-between gap-3">
         {/* Left: Brand Logo & View Title */}
-        <div className="flex items-center gap-2 cursor-pointer" onClick={() => setCurrentView("home")}>
+        <div
+          className="flex items-center gap-2 cursor-pointer"
+          onClick={() => setCurrentView("home")}
+        >
           <img
             alt="CSJMU Logo"
             className="h-9 w-auto object-contain"
@@ -50,22 +61,28 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Right: Switch Mode & Actions */}
+        {/* Right: Actions, Role Badges & Switch Mode */}
         <div className="flex items-center gap-2">
-          {/* Mode Switcher Pill */}
-          <button
-            onClick={() => setCurrentView(currentView === "admin" ? "home" : "admin")}
-            className={`px-3 py-1.5 rounded-full font-body text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm border ${
-              currentView === "admin"
-                ? "bg-[#c62828] text-white border-[#a20513] hover:bg-[#a20513]"
-                : "bg-[#ffe9e3] text-[#a20513] border-[#f5ddd7] hover:bg-[#fbe3dc]"
-            }`}
-          >
-            <span className="material-symbols-outlined text-[16px]">
-              {currentView === "admin" ? "smartphone" : "admin_panel_settings"}
-            </span>
-            <span>{currentView === "admin" ? "Mobile Student View" : "Staff Admin Panel"}</span>
-          </button>
+          {/* Staff-Only Mode Switcher (Visible ONLY for staff after login) */}
+          {isStaff && (
+            <button
+              onClick={() =>
+                setCurrentView(currentView === "admin" ? "home" : "admin")
+              }
+              className={`px-3 py-1.5 rounded-full font-body text-xs font-bold transition-all flex items-center gap-1.5 shadow-sm border ${
+                currentView === "admin"
+                  ? "bg-[#c62828] text-white border-[#a20513] hover:bg-[#a20513]"
+                  : "bg-[#ffe9e3] text-[#a20513] border-[#f5ddd7] hover:bg-[#fbe3dc]"
+              }`}
+            >
+              <span className="material-symbols-outlined text-[16px]">
+                {currentView === "admin" ? "smartphone" : "admin_panel_settings"}
+              </span>
+              <span>
+                {currentView === "admin" ? "Mobile Student View" : "Staff Admin Panel"}
+              </span>
+            </button>
+          )}
 
           {/* Cart Icon Quick Link */}
           {currentView !== "admin" && (
@@ -85,12 +102,43 @@ export default function Header() {
             </button>
           )}
 
-          {/* User Profile Avatar */}
-          <div className="w-8 h-8 rounded-full bg-[#a20513] flex items-center justify-center shadow-[0_2px_8px_rgba(162,5,19,0.25)] shrink-0">
-            <span className="material-symbols-outlined text-white text-[18px]">
-              person
-            </span>
-          </div>
+          {/* User Profile Avatar / Sign In Trigger */}
+          {currentUser ? (
+            <button
+              onClick={openAuthModal}
+              title={`${currentUser.displayName || "User"} (${isStaff ? "Kitchen Staff" : "Student"})`}
+              className="flex items-center gap-1.5 p-1 rounded-full hover:bg-[#ffe9e3] transition-colors"
+            >
+              {currentUser.photoURL ? (
+                <img
+                  alt={currentUser.displayName || "User"}
+                  src={currentUser.photoURL}
+                  className="w-8 h-8 rounded-full object-cover border-2 border-[#a20513] shadow-sm"
+                />
+              ) : (
+                <div className="w-8 h-8 rounded-full bg-[#a20513] text-white flex items-center justify-center font-bold text-xs shadow-sm">
+                  {(currentUser.displayName || "U")[0]}
+                </div>
+              )}
+              <span
+                className={`hidden md:inline px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${
+                  isStaff ? "bg-[#c62828] text-white" : "bg-[#ffe9e3] text-[#a20513]"
+                }`}
+              >
+                {isStaff ? "Staff" : "Student"}
+              </span>
+            </button>
+          ) : (
+            <button
+              onClick={openAuthModal}
+              className="px-3 py-1.5 rounded-full bg-[#a20513] text-white font-body text-xs font-bold hover:bg-[#c62828] flex items-center gap-1 shadow-sm transition-all"
+            >
+              <span className="material-symbols-outlined text-[16px]">
+                login
+              </span>
+              <span>Sign In</span>
+            </button>
+          )}
         </div>
       </div>
     </header>

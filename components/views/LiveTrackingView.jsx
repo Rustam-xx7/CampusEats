@@ -79,13 +79,24 @@ export default function LiveTrackingView() {
         </p>
       </div>
 
-      {/* Pickup Token Hero Card */}
+      {/* Pickup Token & Queue Position Hero Card */}
       <div className="relative overflow-hidden bg-white rounded-2xl p-5 shadow-[0_4px_20px_rgba(138,98,77,0.08)] flex flex-col items-center text-center border border-[#f5ddd7]">
-        <div className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#fbe3dc] text-[#5b403d] font-body text-xs uppercase tracking-wider font-bold">
-          <span className="material-symbols-outlined text-[14px] text-[#a20513]">
-            pin
+        <div className="flex items-center gap-2">
+          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#fbe3dc] text-[#5b403d] font-body text-xs uppercase tracking-wider font-bold">
+            <span className="material-symbols-outlined text-[14px] text-[#a20513]">
+              pin
+            </span>
+            Pickup Token
           </span>
-          Your Pickup Token
+
+          {activeOrder.queuePosition && (
+            <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#ffddb4] text-[#835500] font-body text-xs font-bold">
+              <span className="material-symbols-outlined text-[14px]">
+                format_list_numbered
+              </span>
+              Queue #{activeOrder.queuePosition} in Line
+            </span>
+          )}
         </div>
 
         <div className="my-2 flex flex-col items-center">
@@ -95,13 +106,23 @@ export default function LiveTrackingView() {
           <div className="h-1 w-14 bg-[#feae2c] rounded-full mt-1"></div>
         </div>
 
-        <p className="font-body text-xs text-[#251915] max-w-[280px]">
+        <p className="font-body text-xs text-[#251915] max-w-[290px]">
           Show this token number at{" "}
           <span className="font-body text-xs text-[#a20513] font-bold">
             Counter #2 (Main Canteen)
           </span>{" "}
-          to collect your piping hot meal.
+          when called.
         </p>
+
+        {/* Razorpay Verified Badge */}
+        {activeOrder.paymentId && (
+          <div className="mt-2 inline-flex items-center gap-1.5 px-3 py-1 bg-[#e8f5e9] text-[#1b5e20] rounded-full font-body text-[11px] font-bold border border-[#c8e6c9]">
+            <span className="material-symbols-outlined text-[14px]">
+              verified
+            </span>
+            <span>Razorpay Paid • ID: {activeOrder.paymentId.slice(0, 14)}...</span>
+          </div>
+        )}
 
         <div className="w-full mt-3 pt-3 bg-[#fff1ed] rounded-xl px-4 py-2.5 flex items-center justify-between border border-[#f5ddd7]">
           <div className="flex items-center gap-2">
@@ -111,7 +132,7 @@ export default function LiveTrackingView() {
               </span>
             </div>
             <div className="text-left">
-              <p className="font-body text-[11px] text-[#5b403d]">Estimated Pickup</p>
+              <p className="font-body text-[11px] text-[#5b403d]">Queue Wait Estimate</p>
               <p className="font-body text-xs font-bold text-[#251915]">
                 {activeOrder.estimatedTime}
               </p>
@@ -123,7 +144,7 @@ export default function LiveTrackingView() {
         </div>
       </div>
 
-      {/* Live Kitchen Progress Stepper */}
+      {/* Live Kitchen Progress Stepper (Real-time updates from RTDB) */}
       <div className="bg-white rounded-2xl p-4 shadow-[0_4px_16px_rgba(138,98,77,0.08)] border border-[#f5ddd7]">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
@@ -131,12 +152,12 @@ export default function LiveTrackingView() {
               room_service
             </span>
             <h3 className="font-body text-xs font-bold text-[#251915]">
-              Live Kitchen Progress
+              Realtime Order State
             </h3>
           </div>
           <span className="flex items-center gap-1 font-body text-xs text-[#a20513] font-bold">
             <span className="w-2 h-2 rounded-full bg-[#a20513] animate-ping"></span>
-            Live Updates
+            RTDB Live
           </span>
         </div>
 

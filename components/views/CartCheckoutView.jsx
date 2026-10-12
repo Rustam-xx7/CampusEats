@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useApp } from "@/context/AppContext";
+import GuestInfoModal from "@/components/GuestInfoModal";
 
 export default function CartCheckoutView() {
   const {
@@ -17,11 +18,14 @@ export default function CartCheckoutView() {
     kitchenNotes,
     setKitchenNotes,
     placeOrder,
+    currentUser,
     setCurrentView
   } = useApp();
 
-  const [selectedMethod, setSelectedMethod] = useState("gpay"); // 'gpay' | 'smartcard' | 'cash'
+  const [selectedMethod, setSelectedMethod] = useState("razorpay"); // 'razorpay' | 'smartcard'
   const [isProcessing, setIsProcessing] = useState(false);
+  const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
+  const [paymentNotice, setPaymentNotice] = useState("");
 
   const totalItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -33,18 +37,41 @@ export default function CartCheckoutView() {
     }
   };
 
-  const handlePayAndPlaceOrder = () => {
+  // Trigger payment flow
+  const handleInitiateCheckout = () => {
     if (cart.length === 0) return;
+    setPaymentNotice("");
 
+    // If student is NOT logged in, require student name before payment!
+    if (!currentUser) {
+      setIsGuestModalOpen(true);
+      return;
+    }
+
+    // Otherwise, student is logged in, proceed directly with Razorpay!
+    executePaymentAndOrder({});
+  };
+
+  // Executes Razorpay checkout and only creates order upon payment success
+  const executePaymentAndOrder = async (guestDetails = {}) => {
     setIsProcessing(true);
-    let methodLabel = "GPay (UPI)";
-    if (selectedMethod === "smartcard") methodLabel = "CSJMU Smart Card Wallet";
-    if (selectedMethod === "cash") methodLabel = "Cash on Pickup";
+    setPaymentNotice("");
 
-    setTimeout(() => {
-      placeOrder(methodLabel);
+    try {
+      const result = await placeOrder(guestDetails);
+
+      if (!result || !result.success) {
+        setIsProcessing(false);
+        if (result?.cancelled) {
+          setPaymentNotice("Payment was cancelled. Your items remain in the cart and NO order was placed.");
+        } else {
+          setPaymentNotice(result?.error || "Payment could not be verified. Order was not created.");
+        }
+      }
+    } catch (err) {
       setIsProcessing(false);
-    }, 1200);
+      setPaymentNotice(err.message || "Payment encountered an error. Order was not placed.");
+    }
   };
 
   if (cart.length === 0) {
@@ -299,42 +326,47 @@ export default function CartCheckoutView() {
             <span className="material-symbols-outlined text-[#a20513] text-[20px]">
               payments
             </span>
-            Payment Method
+            Payment Gateway
           </span>
           <span className="font-body text-[10px] font-bold text-[#835500] bg-[#ffddb4]/60 px-2 py-0.5 rounded-full flex items-center gap-1">
             <span className="material-symbols-outlined text-[12px]">security</span>
-            100% Safe Gateway
+            100% Encrypted & Safe
           </span>
         </div>
 
-        {/* Payment Option 1: Instant UPI */}
+        {/* Payment Option 1: Razorpay Gateway (Primary) */}
         <div
-          onClick={() => setSelectedMethod("gpay")}
-          className={`p-3 rounded-xl flex flex-col gap-2 cursor-pointer transition-all border ${
-            selectedMethod === "gpay"
-              ? "bg-[#fff1ed] border-[#c62828]"
+          onClick={() => setSelectedMethod("razorpay")}
+          className={`p-3.5 rounded-xl flex flex-col gap-2.5 cursor-pointer transition-all border ${
+            selectedMethod === "razorpay"
+              ? "bg-[#fff1ed] border-[#c62828] shadow-xs"
               : "bg-white border-[#f5ddd7]"
           }`}
         >
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center text-[#a20513] shadow-xs">
+              <div className="w-9 h-9 rounded-full bg-[#a20513] text-white flex items-center justify-center shadow-xs">
                 <span className="material-symbols-outlined text-[20px]">
-                  qr_code_scanner
+                  lock
                 </span>
               </div>
               <div>
-                <p className="font-body text-xs font-bold text-[#251915]">
-                  Instant UPI Transfer
-                </p>
+                <div className="flex items-center gap-1.5">
+                  <p className="font-body text-xs font-bold text-[#251915]">
+                    Razorpay Online Gateway
+                  </p>
+                  <span className="bg-[#feae2c] text-[#291800] font-body text-[9px] font-extrabold px-1.5 py-0.2 rounded">
+                    OFFICIAL
+                  </span>
+                </div>
                 <p className="font-body text-[11px] text-[#5b403d]">
-                  GPay, PhonePe, Paytm & BHIM
+                  UPI, GPay, PhonePe, Cards, NetBanking
                 </p>
               </div>
             </div>
             <div
               className={`w-5 h-5 rounded-full flex items-center justify-center ${
-                selectedMethod === "gpay"
+                selectedMethod === "razorpay"
                   ? "bg-[#a20513] text-white"
                   : "bg-[#fbe3dc] text-transparent"
               }`}
@@ -342,18 +374,27 @@ export default function CartCheckoutView() {
               <span className="material-symbols-outlined text-[14px]">check</span>
             </div>
           </div>
-          {/* App Pills */}
-          <div className="flex items-center gap-1.5 pt-1 pl-11 overflow-x-auto">
-            <span className="px-2.5 py-0.5 bg-white text-[#251915] font-body text-[10px] font-bold rounded-full shadow-xs">
+
+          {/* Payment Badges */}
+          <div className="flex items-center gap-1.5 pl-11 overflow-x-auto text-[10px] font-bold">
+            <span className="px-2 py-0.5 bg-white text-[#251915] rounded-full shadow-xs border border-[#f5ddd7]">
               <span className="text-[#a20513]">G</span>Pay
             </span>
-            <span className="px-2.5 py-0.5 bg-white text-[#251915] font-body text-[10px] font-bold rounded-full shadow-xs">
-              <span className="text-[#835500]">पे</span> PhonePe
+            <span className="px-2 py-0.5 bg-white text-[#251915] rounded-full shadow-xs border border-[#f5ddd7]">
+              PhonePe
             </span>
-            <span className="px-2.5 py-0.5 bg-white text-[#251915] font-body text-[10px] font-bold rounded-full shadow-xs">
+            <span className="px-2 py-0.5 bg-white text-[#251915] rounded-full shadow-xs border border-[#f5ddd7]">
               Paytm
             </span>
+            <span className="px-2 py-0.5 bg-white text-[#251915] rounded-full shadow-xs border border-[#f5ddd7]">
+              RuPay / Visa
+            </span>
           </div>
+
+          <p className="text-[10px] text-[#835500] font-semibold pl-11 flex items-center gap-1">
+            <span className="material-symbols-outlined text-[13px]">info</span>
+            <span>Prepaid Policy: Order queue ticket will generate ONLY upon successful payment.</span>
+          </p>
         </div>
 
         {/* Payment Option 2: CSJMU Smart Card */}
@@ -395,53 +436,28 @@ export default function CartCheckoutView() {
             <span className="material-symbols-outlined text-[14px]">check</span>
           </div>
         </div>
-
-        {/* Payment Option 3: Cash on Pickup */}
-        <div
-          onClick={() => setSelectedMethod("cash")}
-          className={`p-3 rounded-xl flex items-center justify-between cursor-pointer transition-all border ${
-            selectedMethod === "cash"
-              ? "bg-[#fff1ed] border-[#c62828]"
-              : "bg-white border-[#f5ddd7]"
-          }`}
-        >
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-full bg-[#ffe9e3] flex items-center justify-center text-[#251915] shrink-0">
-              <span className="material-symbols-outlined text-[20px]">
-                payments
-              </span>
-            </div>
-            <div>
-              <p className="font-body text-xs font-bold text-[#251915]">
-                Cash on Pickup
-              </p>
-              <p className="font-body text-[11px] text-[#5b403d]">
-                Pay exact change at Counter #2
-              </p>
-            </div>
-          </div>
-          <div
-            className={`w-5 h-5 rounded-full flex items-center justify-center ${
-              selectedMethod === "cash"
-                ? "bg-[#a20513] text-white"
-                : "bg-[#fbe3dc] text-transparent"
-            }`}
-          >
-            <span className="material-symbols-outlined text-[14px]">check</span>
-          </div>
-        </div>
       </div>
 
       {/* Bottom Sticky Action Panel */}
       <div className="fixed bottom-0 left-0 right-0 z-40 bg-[#fff8f6]/95 backdrop-blur-xl p-4 pb-safe border-t border-[#f5ddd7]">
         <div className="flex flex-col gap-2 max-w-md mx-auto">
+          {/* Payment Notice / Warning Banner */}
+          {paymentNotice && (
+            <div className="p-3 bg-[#ffdad6] text-[#93000a] rounded-2xl font-body text-xs font-semibold flex items-center gap-2 shadow-xs border border-[#ffb4ab]">
+              <span className="material-symbols-outlined text-[18px] shrink-0">
+                warning
+              </span>
+              <span>{paymentNotice}</span>
+            </div>
+          )}
+
           <div className="flex items-center justify-between px-1">
             <div className="flex items-center gap-1 text-[#5b403d]">
               <span className="material-symbols-outlined text-[15px] text-[#835500]">
                 verified_user
               </span>
               <span className="font-body text-[11px] font-semibold">
-                CSJMU Institutional Gateway
+                Razorpay PCI-DSS Level 1 Gateway
               </span>
             </div>
             <span className="font-body text-xs font-extrabold text-[#a20513]">
@@ -451,7 +467,7 @@ export default function CartCheckoutView() {
 
           <button
             disabled={isProcessing}
-            onClick={handlePayAndPlaceOrder}
+            onClick={handleInitiateCheckout}
             className="w-full bg-[#a20513] hover:bg-[#c62828] text-white py-3.5 px-6 rounded-full font-headline text-xl uppercase tracking-wide flex items-center justify-center gap-2 shadow-[0_8px_20px_rgba(198,40,40,0.28)] active:scale-[0.98] transition-all disabled:opacity-75"
           >
             {isProcessing ? (
@@ -459,17 +475,11 @@ export default function CartCheckoutView() {
                 <span className="material-symbols-outlined animate-spin text-[20px]">
                   sync
                 </span>
-                <span>Generating Token...</span>
+                <span>Connecting Razorpay...</span>
               </>
             ) : (
               <>
-                <span>
-                  {selectedMethod === "gpay"
-                    ? `Pay ₹${cartTotal} via GPay`
-                    : selectedMethod === "smartcard"
-                    ? `Pay ₹${cartTotal} via Smart Card`
-                    : `Place Order (Pay ₹${cartTotal} Cash)`}
-                </span>
+                <span>Pay ₹{cartTotal} to Place Order</span>
                 <span className="material-symbols-outlined text-[20px]">
                   arrow_forward
                 </span>
@@ -478,6 +488,16 @@ export default function CartCheckoutView() {
           </button>
         </div>
       </div>
+
+      {/* Guest Identification Gate Modal */}
+      <GuestInfoModal
+        isOpen={isGuestModalOpen}
+        onClose={() => setIsGuestModalOpen(false)}
+        onProceed={(guestData) => {
+          setIsGuestModalOpen(false);
+          executePaymentAndOrder(guestData);
+        }}
+      />
     </div>
   );
 }
