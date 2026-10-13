@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useApp } from "@/context/AppContext";
-import GuestInfoModal from "@/components/GuestInfoModal";
 
 export default function CartCheckoutView() {
   const {
@@ -19,13 +18,21 @@ export default function CartCheckoutView() {
     setKitchenNotes,
     placeOrder,
     currentUser,
+    openAuthModal,
     setCurrentView
   } = useApp();
 
-  const [selectedMethod, setSelectedMethod] = useState("razorpay"); // 'razorpay' | 'smartcard'
   const [isProcessing, setIsProcessing] = useState(false);
-  const [isGuestModalOpen, setIsGuestModalOpen] = useState(false);
   const [paymentNotice, setPaymentNotice] = useState("");
+  const [phone, setPhone] = useState("");
+
+  // Remember the mobile number on this device
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("campuseats_phone");
+      if (saved) setPhone(saved);
+    } catch {}
+  }, []);
 
   const totalItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -37,37 +44,48 @@ export default function CartCheckoutView() {
     }
   };
 
-  // Trigger payment flow
+  const isValidPhone = (p) => /^[6-9]\d{9}$/.test(p);
+
+  // Validate, then start the payment flow
   const handleInitiateCheckout = () => {
     if (cart.length === 0) return;
     setPaymentNotice("");
 
-    // If student is NOT logged in, require student name before payment!
     if (!currentUser) {
-      setIsGuestModalOpen(true);
+      setPaymentNotice("Please log in to place your order.");
+      openAuthModal();
       return;
     }
 
-    // Otherwise, student is logged in, proceed directly with Razorpay!
-    executePaymentAndOrder({});
+    if (!isValidPhone(phone)) {
+      setPaymentNotice("Enter a valid 10-digit mobile number to continue.");
+      return;
+    }
+
+    try {
+      localStorage.setItem("campuseats_phone", phone);
+    } catch {}
+
+    executePaymentAndOrder();
   };
 
-  // Executes Razorpay checkout and only creates order upon payment success
-  const executePaymentAndOrder = async (guestDetails = {}) => {
+  // Razorpay payment, then the order is created and verified in AppContext
+  const executePaymentAndOrder = async () => {
     setIsProcessing(true);
     setPaymentNotice("");
 
     try {
-      const result = await placeOrder(guestDetails);
+      const result = await placeOrder({ guestPhone: phone });
 
       if (!result || !result.success) {
         setIsProcessing(false);
-        if (result?.cancelled) {
-          setPaymentNotice("Payment was cancelled. Your items remain in the cart and NO order was placed.");
-        } else {
-          setPaymentNotice(result?.error || "Payment could not be verified. Order was not created.");
-        }
+        setPaymentNotice(
+          result?.cancelled
+            ? "Payment was cancelled. Your items remain in the cart and NO order was placed."
+            : result?.error || "Payment could not be completed. Order was not created."
+        );
       }
+      // On success AppContext clears the cart and opens the tracking view
     } catch (err) {
       setIsProcessing(false);
       setPaymentNotice(err.message || "Payment encountered an error. Order was not placed.");
@@ -158,6 +176,9 @@ export default function CartCheckoutView() {
               alt={item.name}
               className="w-20 h-20 rounded-xl object-cover shrink-0 shadow-xs bg-[#ffe9e3]"
               src={item.image}
+              onError={(e) => {
+                e.currentTarget.style.visibility = "hidden";
+              }}
             />
             <div className="flex flex-col justify-between flex-1 min-w-0 h-20 py-0.5">
               <div className="flex items-start justify-between gap-1">
@@ -226,6 +247,7 @@ export default function CartCheckoutView() {
           onChange={(e) => setKitchenNotes(e.target.value)}
           placeholder="e.g. Less spicy dal, pack extra green chutney, serve rotis piping hot"
           rows={2}
+          maxLength={300}
           className="w-full bg-[#fff1ed] rounded-xl p-3 font-body text-xs text-[#251915] placeholder:text-[#8f706c] focus:outline-none focus:bg-[#ffe9e3] transition-colors resize-none border border-[#f5ddd7]"
         />
         <div className="flex gap-1.5 flex-wrap pt-0.5">
@@ -262,9 +284,11 @@ export default function CartCheckoutView() {
                 <span className="font-headline text-lg text-[#251915] tracking-wider">
                   {coupon.code}
                 </span>
-                <span className="bg-[#a20513] text-white font-body text-[9px] font-bold px-1.5 py-0.2 rounded">
-                  APPLIED
-                </span>
+                {coupon.applied && (
+                  <span className="bg-[#a20513] text-white font-body text-[9px] font-bold px-1.5 py-0.2 rounded">
+                    APPLIED
+                  </span>
+                )}
               </div>
               <p className="font-body text-[11px] text-[#835500] truncate">
                 ₹{coupon.discount} Student Canteen Subsidy
@@ -319,7 +343,7 @@ export default function CartCheckoutView() {
         </div>
       </div>
 
-      {/* Payment Methods Section with embedded checkout button */}
+      {/* Payment Section with embedded checkout button */}
       <div className="bg-white rounded-2xl p-4 shadow-[0_4px_16px_rgba(138,98,77,0.08)] flex flex-col gap-3 border border-[#f5ddd7] mb-28">
         <div className="flex items-center justify-between">
           <span className="font-body text-xs font-bold text-[#251915] flex items-center gap-1.5">
@@ -334,15 +358,35 @@ export default function CartCheckoutView() {
           </span>
         </div>
 
-        {/* Payment Option 1: Razorpay Gateway (Primary) */}
-        <div
-          onClick={() => setSelectedMethod("razorpay")}
-          className={`p-3.5 rounded-xl flex flex-col gap-2.5 cursor-pointer transition-all border ${
-            selectedMethod === "razorpay"
-              ? "bg-[#fff1ed] border-[#c62828] shadow-xs"
-              : "bg-white border-[#f5ddd7]"
-          }`}
-        >
+        {/* Mobile number */}
+        <div className="flex flex-col gap-1.5">
+          <label
+            htmlFor="checkout-phone"
+            className="font-body text-xs font-bold text-[#251915] flex items-center gap-1.5"
+          >
+            <span className="material-symbols-outlined text-[#a20513] text-[18px]">
+              call
+            </span>
+            Mobile Number
+          </label>
+          <input
+            id="checkout-phone"
+            type="tel"
+            inputMode="numeric"
+            autoComplete="tel"
+            maxLength={10}
+            value={phone}
+            onChange={(e) => setPhone(e.target.value.replace(/\D/g, ""))}
+            placeholder="10-digit mobile number"
+            className="w-full bg-[#fff1ed] rounded-xl p-3 font-body text-xs text-[#251915] placeholder:text-[#8f706c] focus:outline-none focus:bg-[#ffe9e3] transition-colors border border-[#f5ddd7]"
+          />
+          <p className="font-body text-[10px] text-[#5b403d]">
+            Used for payment and pickup updates.
+          </p>
+        </div>
+
+        {/* Razorpay Gateway */}
+        <div className="p-3.5 rounded-xl flex flex-col gap-2.5 bg-[#fff1ed] border border-[#c62828] shadow-xs">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5">
               <div className="w-9 h-9 rounded-full bg-[#a20513] text-white flex items-center justify-center shadow-xs">
@@ -364,13 +408,7 @@ export default function CartCheckoutView() {
                 </p>
               </div>
             </div>
-            <div
-              className={`w-5 h-5 rounded-full flex items-center justify-center ${
-                selectedMethod === "razorpay"
-                  ? "bg-[#a20513] text-white"
-                  : "bg-[#fbe3dc] text-transparent"
-              }`}
-            >
+            <div className="w-5 h-5 rounded-full flex items-center justify-center bg-[#a20513] text-white">
               <span className="material-symbols-outlined text-[14px]">check</span>
             </div>
           </div>
@@ -395,46 +433,6 @@ export default function CartCheckoutView() {
             <span className="material-symbols-outlined text-[13px]">info</span>
             <span>Prepaid Policy: Order queue ticket will generate ONLY upon successful payment.</span>
           </p>
-        </div>
-
-        {/* Payment Option 2: CSJMU Smart Card */}
-        <div
-          onClick={() => setSelectedMethod("smartcard")}
-          className={`p-3 rounded-xl flex items-center justify-between cursor-pointer transition-all border ${
-            selectedMethod === "smartcard"
-              ? "bg-[#fff1ed] border-[#c62828]"
-              : "bg-white border-[#f5ddd7]"
-          }`}
-        >
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-full bg-[#ffe9e3] flex items-center justify-center text-[#251915] shrink-0">
-              <span className="material-symbols-outlined text-[20px]">
-                credit_card
-              </span>
-            </div>
-            <div>
-              <div className="flex items-center gap-1.5">
-                <p className="font-body text-xs font-bold text-[#251915]">
-                  CSJMU Smart Card
-                </p>
-                <span className="bg-[#f5ddd7] text-[#5b403d] font-body text-[9px] font-bold px-1.5 py-0.2 rounded-full">
-                  Wallet
-                </span>
-              </div>
-              <p className="font-body text-[11px] text-[#835500] font-semibold">
-                Available Balance: ₹450
-              </p>
-            </div>
-          </div>
-          <div
-            className={`w-5 h-5 rounded-full flex items-center justify-center ${
-              selectedMethod === "smartcard"
-                ? "bg-[#a20513] text-white"
-                : "bg-[#fbe3dc] text-transparent"
-            }`}
-          >
-            <span className="material-symbols-outlined text-[14px]">check</span>
-          </div>
         </div>
 
         {/* Payment Notice / Warning Banner */}
@@ -465,7 +463,7 @@ export default function CartCheckoutView() {
           </div>
         </div>
 
-        {/* In-Flow Payment CTA Button */}
+        {/* Payment CTA Button */}
         <button
           disabled={isProcessing}
           onClick={handleInitiateCheckout}
@@ -488,16 +486,6 @@ export default function CartCheckoutView() {
           )}
         </button>
       </div>
-
-      {/* Guest Identification Gate Modal */}
-      <GuestInfoModal
-        isOpen={isGuestModalOpen}
-        onClose={() => setIsGuestModalOpen(false)}
-        onProceed={(guestData) => {
-          setIsGuestModalOpen(false);
-          executePaymentAndOrder(guestData);
-        }}
-      />
     </div>
   );
 }
