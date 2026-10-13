@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useApp } from "@/context/AppContext";
+import React, { useState, useEffect } from "react";
 
 export default function AuthModal({ isOpen, onClose }) {
   const {
@@ -19,6 +20,16 @@ export default function AuthModal({ isOpen, onClose }) {
   const [errorMessage, setErrorMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const [goAdmin, setGoAdmin] = useState(false);
+
+  // Wait until userRole is "staff" before opening the admin page,
+  // otherwise the navigation guard still sees the old role and blocks it
+  useEffect(() => {
+    if (goAdmin && userRole === "staff") {
+      setCurrentView("admin");
+      setGoAdmin(false);
+    }
+  }, [goAdmin, userRole, setCurrentView]);
 
   if (!isOpen) return null;
 
@@ -55,12 +66,10 @@ export default function AuthModal({ isOpen, onClose }) {
           ? "Staff role verified! Admin portal unlocked."
           : "Student role confirmed!"
       );
+      if (selectedRole === "staff") setGoAdmin(true);
       setTimeout(() => {
         setSuccessMessage("");
         onClose();
-        if (selectedRole === "staff") {
-          setCurrentView("admin");
-        }
       }, 1200);
     } catch (err) {
       setErrorMessage(err.message || "Could not save role profile.");
@@ -180,11 +189,10 @@ export default function AuthModal({ isOpen, onClose }) {
               </div>
 
               <span
-                className={`px-2.5 py-0.5 rounded-full font-body text-[10px] font-bold uppercase ${
-                  userRole === "staff"
+                className={`px-2.5 py-0.5 rounded-full font-body text-[10px] font-bold uppercase ${userRole === "staff"
                     ? "bg-[#c62828] text-white"
                     : "bg-[#feae2c] text-[#291800]"
-                }`}
+                  }`}
               >
                 {userRole === "staff" ? "Kitchen Staff" : "Student"}
               </span>
@@ -200,11 +208,10 @@ export default function AuthModal({ isOpen, onClose }) {
                   <button
                     type="button"
                     onClick={() => setSelectedRole("student")}
-                    className={`p-3 rounded-2xl font-body text-xs font-bold flex flex-col items-center gap-1 transition-all border ${
-                      selectedRole === "student"
+                    className={`p-3 rounded-2xl font-body text-xs font-bold flex flex-col items-center gap-1 transition-all border ${selectedRole === "student"
                         ? "bg-[#a20513] text-white border-[#a20513] shadow-xs"
                         : "bg-white text-[#5b403d] border-[#f5ddd7] hover:bg-[#ffe9e3]"
-                    }`}
+                      }`}
                   >
                     <span className="material-symbols-outlined text-[20px]">
                       school
@@ -216,11 +223,10 @@ export default function AuthModal({ isOpen, onClose }) {
                   <button
                     type="button"
                     onClick={() => setSelectedRole("staff")}
-                    className={`p-3 rounded-2xl font-body text-xs font-bold flex flex-col items-center gap-1 transition-all border ${
-                      selectedRole === "staff"
+                    className={`p-3 rounded-2xl font-body text-xs font-bold flex flex-col items-center gap-1 transition-all border ${selectedRole === "staff"
                         ? "bg-[#a20513] text-white border-[#a20513] shadow-xs"
                         : "bg-white text-[#5b403d] border-[#f5ddd7] hover:bg-[#ffe9e3]"
-                    }`}
+                      }`}
                   >
                     <span className="material-symbols-outlined text-[20px]">
                       badge
@@ -232,28 +238,28 @@ export default function AuthModal({ isOpen, onClose }) {
               </div>
 
               {/* Staff ID Verification Input */}
-              {selectedRole === "staff" && (
+              {selectedRole === "staff" && userRole !== "staff" && (
                 <div className="space-y-1.5 p-3.5 bg-[#ffe9e3] rounded-2xl border border-[#f5ddd7]">
                   <label className="font-body text-xs font-bold text-[#251915] flex items-center gap-1">
                     <span className="material-symbols-outlined text-[#a20513] text-[16px]">
                       verified_user
                     </span>
-                    <span>Staff ID Number</span>
+                    <span>Staff Passcode</span>
                     <span className="text-[#a20513]">*</span>
                   </label>
                   <p className="font-body text-[11px] text-[#5b403d]">
-                    Only verified cafeteria personnel with a valid Staff ID can access the Kitchen Control Panel.
+                    Ask the canteen manager for the staff passcode.
                   </p>
                   <input
-                    type="text"
+                    type="password"
                     value={inputStaffId}
                     onChange={(e) => setInputStaffId(e.target.value)}
-                    placeholder="e.g. STAFF-101 or KITCHEN-2024"
+                    placeholder="Enter staff passcode"
+                    autoComplete="off"
                     className="w-full mt-1 px-3 py-2 bg-white rounded-xl font-body text-xs text-[#251915] placeholder:text-[#5b403d]/60 outline-none border border-[#f5ddd7] focus:border-[#a20513]"
                   />
                 </div>
               )}
-
               {/* Action Buttons */}
               <div className="pt-2 flex items-center gap-2">
                 <button

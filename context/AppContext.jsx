@@ -185,14 +185,44 @@ export function AppProvider({ children }) {
 
   // Staff access can no longer be self-assigned in the browser.
   // An owner adds /admins/<uid>: true in the Firebase Console.
-  const updateUserRole = async (role) => {
-    if (role === "staff") {
-      throw new Error(
-        "Staff access is granted by the canteen admin. Ask them to add your account."
-      );
+    // Staff access: the passcode is checked on the server, never in the browser
+  const updateUserRole = async (role, passcode) => {
+    if (role !== "staff") return;        // everyone is a student by default
+    if (userRole === "staff") return;    // already staff
+
+    if (!auth.currentUser) throw new Error("Please log in first.");
+    const idToken = await auth.currentUser.getIdToken();
+
+    const res = await fetch("/api/staff/claim", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${idToken}`,
+      },
+      body: JSON.stringify({ passcode }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data.success) {
+      throw new Error(data.error || "Could not verify the passcode.");
     }
-    setUserRole("student");
-    setStaffId("");
+    setUserRole("staff");
+  };
+
+    const claimStaffAccess = async (passcode) => {
+    if (!auth.currentUser) throw new Error("Please log in first.");
+    const idToken = await auth.currentUser.getIdToken();
+    const res = await fetch("/api/staff/claim", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${idToken}`,
+      },
+      body: JSON.stringify({ passcode }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data.success) throw new Error(data.error || "Could not verify passcode.");
+    setUserRole("staff");
+    return true;
   };
 
   // =====================================================
@@ -449,6 +479,7 @@ export function AppProvider({ children }) {
         loginWithGoogleAuth,
         logoutAuth,
         updateUserRole,
+        claimStaffAccess,
         cart,
         addToCart,
         removeFromCart,

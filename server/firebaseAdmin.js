@@ -1,6 +1,7 @@
 import { initializeApp, getApps, cert } from "firebase-admin/app";
 import { getDatabase } from "firebase-admin/database";
 import { getAuth } from "firebase-admin/auth";
+import { getFirestore } from "firebase-admin/firestore";
 
 function init() {
   if (getApps().length) return;
@@ -21,3 +22,4 @@ function init() {
 // Called inside request handlers, never at import time
 export function adminDb() { init(); return getDatabase(); }
 export function adminAuth() { init(); return getAuth(); }
+export function adminFirestore() { init(); return getFirestore(); }
